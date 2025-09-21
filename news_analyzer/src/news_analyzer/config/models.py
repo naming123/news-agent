@@ -13,8 +13,8 @@ class CrawlerConfig:
     """크롤러 설정"""
     max_retries: int = 3
     timeout: int = 10
-    min_delay: float = 1.0
-    max_delay: float = 2.0
+    min_delay: float = 2.0
+    max_delay: float = 4.0
     user_agents: List[str] = field(default_factory=lambda: [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
