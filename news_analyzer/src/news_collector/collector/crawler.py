@@ -21,7 +21,8 @@ class NaverNewsCrawler:
     BASE_URL = "https://openapi.naver.com/v1/search/news.json"
 
 
-    def __init__(self, client_id: str | None = None, client_secret: str | None = None, timeout: float = 10.0):
+    def __init__(self, client_id: str | None = None, client_secret: str | None = None, timeout: float = 10.0,
+        config: dict | None = None):
         # 1) .env 로드: 어디서 실행하든 루트 .env를 찾게
         try:
             from dotenv import load_dotenv, find_dotenv  # type: ignore
@@ -38,7 +39,25 @@ class NaverNewsCrawler:
                 load_dotenv(dotenv_path=dotenv_path, override=True)
         except Exception:
             pass
+        
+        
+        # 1) 기본값 + config 병합
+        cfg = {
+            "timeout": 10.0,
+            "min_delay": 2.0,
+            "max_delay": 4.0,
+            "max_page": 3,
+            "max_retries": 3,     # 429 등 재시도 횟수
+            "backoff_base": 30,  # 백오프 시작(sec)
+        }
+        if config:
+            # 타입 안전하게 덮어쓰기
+            for k, v in config.items():
+                cfg[k] = v
 
+        # timeout 우선순위: (인자) > (config) > (기본)
+        if timeout is not None:
+            cfg["timeout"] = float(timeout)
         # 2) 키 읽기 + 공백/개행 방지
         env_id = (os.getenv("NAVER_CLIENT_ID") or "").strip()
         env_secret = (os.getenv("NAVER_CLIENT_SECRET") or "").strip()
@@ -50,7 +69,13 @@ class NaverNewsCrawler:
             raise ValueError(
                 "네이버 API 키가 없습니다. .env(NAVER_CLIENT_ID, NAVER_CLIENT_SECRET) 또는 생성자 인자 확인"
             )
-
+        # 3) 세션/헤더/설정
+        self.timeout = float(cfg["timeout"])
+        self.min_delay = float(cfg.get("min_delay", 2.0))
+        self.max_delay = float(cfg.get("max_delay", 4.0))
+        self.max_page  = int(cfg.get("max_page", 3))
+        self.max_retries = int(cfg.get("max_retries", 3))
+        self.backoff_base = int(cfg.get("backoff_base", 30))
         self.session = requests.Session()
         self.timeout = timeout
         self.headers = {
@@ -63,21 +88,42 @@ class NaverNewsCrawler:
     # Low-level API call
     # ---------------------------
     def search_news(self, query: str, start: int = 1, display: int = 10, sort: str = "date") -> Optional[Dict]:
-        """
-        네이버 뉴스 API 호출 (정렬: sim | date)
-        start: 1~1000, display: 1~100
-        """
+        """네이버 뉴스 API 호출 (재시도 로직 포함)"""
         params = {"query": query, "start": start, "display": display, "sort": sort}
-        try:
-            resp = self.session.get(self.BASE_URL, headers=self.headers, params=params, timeout=self.timeout)
-            if resp.status_code == 200:
-                return resp.json()
-            else:
-                print(f"[API 실패] status={resp.status_code} body={resp.text[:300]}")
+        
+        max_retries = 5
+        retry_count = 0
+        
+        while retry_count < max_retries:
+            try:
+                resp = self.session.get(self.BASE_URL, headers=self.headers, params=params, timeout=self.timeout)
+                print(f"[HTTP] status={resp.status_code} params={params}")
+                if resp.status_code == 200:
+                    j=resp.json()
+                    print(f"[HTTP] total={j.get('total')} items={len(j.get('items') or [])}")
+                    return resp.json()
+                    
+                elif resp.status_code == 429:
+                    # Rate limit - exponential backoff
+                    wait_time = (2 ** retry_count) + random.uniform(0, 1)
+                    print(f"[429 Rate Limit] {retry_count+1}/{max_retries} 재시도, {wait_time:.1f}초 대기...")
+                    time.sleep(wait_time)
+                    retry_count += 1
+                    continue
+                    
+                else:
+                    print(f"[API 실패] status={resp.status_code}")
+                    break
+                    return None
+                    
+            except requests.exceptions.RequestException as e:
+                print(f"[API 예외] {e}")
+                break
                 return None
-        except requests.exceptions.RequestException as e:
-            print(f"[API 예외] {e}")
-            return None
+                
+        print(f"[API 포기] {max_retries}회 재시도 실패")
+        
+        return None
 
     # ---------------------------
     # Safe access & date parsing
@@ -158,7 +204,7 @@ class NaverNewsCrawler:
         all_items: List[Dict] = []
         page_size = 100
         current_start = 1
-        hard_cap = 1000
+        hard_cap = 10000
 
         df = datetime.strptime(date_from, "%Y-%m-%d").date() if date_from else None
         dt_ = datetime.strptime(date_to,   "%Y-%m-%d").date() if date_to   else None
@@ -187,7 +233,9 @@ class NaverNewsCrawler:
                 batch_dates.append(d)
                 if (df is None or d >= df) and (dt_ is None or d <= dt_):
                     filtered_batch.append(it)
-
+            print(f"[PAGE] start={current_start} got={len(items)} kept={len(filtered_batch)} "
+                    f"min={min(batch_dates) if batch_dates else None} max={max(batch_dates) if batch_dates else None} "
+                    f"acc={len(all_items)}")
             if filtered_batch:
                 all_items.extend(filtered_batch)
 
@@ -207,7 +255,7 @@ class NaverNewsCrawler:
 
             current_start += display_count
             time.sleep(random.uniform(*sleep_range))
-
+            print(f"[DONE] collected={len(all_items)}")
         return all_items
 
     # ---------------------------

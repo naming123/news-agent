@@ -15,7 +15,10 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import streamlit as st
 from wordcloud import WordCloud
-
+from datetime import datetime
+from zoneinfo import ZoneInfo  # Python 3.9+
+def now_kst(fmt="%Y-%m-%d %H:%M:%S"):
+    return datetime.now(ZoneInfo("Asia/Seoul")).strftime(fmt)
 
 # =========================
 # Infra / Utilities
@@ -88,7 +91,7 @@ class DataManager:
 
     def run_crawler(
         self,
-        target_excel: Path,
+        input: Path,
         *,
         companies: list[str] | None = None,
         keywords: list[str] | None = None,
@@ -97,26 +100,31 @@ class DataManager:
         output_sheet: str | None = None,
         extra_args: list[str] | None = None,
     ) -> tuple[bool, str]:
+        
         try:
             # 실행 기준 디렉토리: news_analyzer/src (없으면 news_analyzer)
             crawler_cwd = self.base_dir / "src"
+            
             if not crawler_cwd.exists():
                 crawler_cwd = self.base_dir
 
             # 크롤러 기준의 상대경로 계산 (실패 시 절대경로 fallback)
+            
             try:
-                rel_path = target_excel.resolve().relative_to(crawler_cwd.parent.resolve())
+                
+                rel_path = input.resolve().relative_to(crawler_cwd.parent.resolve())
             except Exception:
-                rel_path = target_excel.resolve()
-
+                
+                rel_path = input.resolve()
+            # breakpoint()
             # python -m news_collector.ioHandle.batch_crawler <상대(or 절대)경로>
-            cmd = [sys.executable, "-m", "news_collector.ioHandle.batch_crawler", str(rel_path)]
-
+            cmd = [sys.executable, "-m", "news_collector.ioHandle.batch_crawler", "--input", str(rel_path)]
+            
             # 옵션들
-            if companies:
-                cmd += ["--companies", ",".join(companies)]
-            if keywords:
-                cmd += ["--keywords", ",".join(keywords)]
+    
+            if companies is not None: cmd += ["--companies", ",".join(companies)]
+            if keywords  is not None: cmd += ["--keywords",  ",".join(keywords)]
+
             if start:
                 cmd += ["--start", start]
             if end:
@@ -126,10 +134,10 @@ class DataManager:
 
             # 항상 인플레이스 저장
             cmd += ["--inplace"]
-
+            
             if extra_args:
                 cmd += extra_args
-
+            # breakpoint()
             completed = subprocess.run(
                 cmd,
                 cwd=str(crawler_cwd),             # ← 여기서 상대경로가 유효해짐
@@ -139,6 +147,7 @@ class DataManager:
                 errors="replace",
                 check=False,
             )
+            
             ok = (completed.returncode == 0)
             msg = (completed.stdout or "") + ("\n" + (completed.stderr or ""))
             return ok, msg.strip()
@@ -283,17 +292,19 @@ class ESGNewsApp:
 
             st.markdown("---")
             st.subheader("크롤링 실행")
-
+            
             if st.button("🚀 실행 (입력값으로 크롤링)", use_container_width=True, type="primary") and not invalid:
                 with st.spinner("크롤링 중..."):
                     ok, log = self.dm.run_crawler(
-                        target_path,                       # ← 선택 파일을 실행 대상으로
+
+                        input=target_path,                       # ← 선택 파일을 실행 대상으로
                         companies=companies,
                         keywords=keywords,
                         start=start,
                         end=end,
                         output_sheet=out_sheet or None,
                     )
+                
                 if ok:
                     st.success(f"✅ 크롤링 완료! `{out_sheet or 'output'}` 시트가 갱신되었습니다.")
                     self.dm.clear_cache()
@@ -644,4 +655,6 @@ class ESGNewsApp:
 # Entry
 # =========================
 if __name__ == "__main__":
+    print("app start: "+now_kst())                 # 2025-09-30 18:27:12
     ESGNewsApp().run()
+

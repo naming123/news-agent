@@ -2,7 +2,8 @@
 엑셀 기반 입출력 처리 모듈 (B안: date_from/date_to 시그니처 확장)
 """
 from __future__ import annotations
-
+from datetime import datetime
+from zoneinfo import ZoneInfo  # Python 3.9+
 import logging
 import re
 from collections import defaultdict
@@ -13,7 +14,7 @@ from typing import List, Dict, Any, Optional
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
-
+from types import SimpleNamespace
 from ..collector.crawler import NaverNewsCrawler
 from ..config.models import NewsArticle, CrawlerConfig  # ← 누락 보강
 
@@ -22,32 +23,37 @@ logger = logging.getLogger(__name__)
 # =========================
 # Batch Crawler
 # =========================
+def now_kst(fmt="%Y-%m-%d %H:%M:%S"):
+    return datetime.now(ZoneInfo("Asia/Seoul")).strftime(fmt)
 class BatchNewsCrawler:
     def __init__(
         self,
-        input_file: str,
+        input: str,
         output_dir: str = "./output",
-        config: Optional[CrawlerConfig] = None,
+        config: dict | None = None,
         *,
-        inplace: bool = False,           # 인자 유지(사용 안 함)
-        output_sheet: str = "output",    # 인자 유지(사용 안 함)
+        inplace: bool = False,
+        output_sheet: str = "output",
+        args=None
     ):
-        self.input_file = input_file
+        self.input = input
         self.output_dir = Path(output_dir); self.output_dir.mkdir(parents=True, exist_ok=True)
-
-        self.excel_config = ExcelInputHandler.read_config(input_file)
-        self.crawler_config = config or CrawlerConfig(
-            max_retries=self.excel_config.get("max_retries", 3),
-            timeout=self.excel_config.get("timeout", 10),
-            min_delay=self.excel_config.get("min_delay", 1.0),
-            max_delay=self.excel_config.get("max_delay", 2.0),
+        from types import SimpleNamespace
+        self.args = args or SimpleNamespace(
+            companies=None, keywords=None, start=None, end=None,
+            output_sheet=None, inplace=False, max_results=None,
         )
 
-        self.crawler = NaverNewsCrawler()
-        self.results_by_keyword: Dict[str, List[NewsArticle | Dict[str, Any]]] = defaultdict(list)
-        self.results_by_company: Dict[str, Dict[str, List[NewsArticle | Dict[str, Any]]]] = defaultdict(dict)
+        self.config = config or {}                # ← 이름도 명확히
+        self.excel_config = self.config           # (아래 코드 호환되게 유지)
 
-        # 저장 관련 옵션(호환용. 실제 저장은 별도 파일에만)
+        # 크롤러 생성 시도
+        self.crawler = NaverNewsCrawler(config=self.config)
+
+        from collections import defaultdict
+        self.results_by_keyword = defaultdict(list)
+        self.results_by_company = defaultdict(dict)
+
         self.inplace = inplace
         self.output_sheet = output_sheet
 
@@ -56,14 +62,30 @@ class BatchNewsCrawler:
         - Company 시트 × ESG 키워드 조합으로 네이버 뉴스 검색
         - 기간 필터(date_from/date_to) 적용
         - 결과는 self.results_by_keyword 에 {keyword: [기사...]} 형태로 누적
-        - 마지막에 별도 타임스탬프 파일로 저장하고, SAVED_FILE 로그를 출력
+        - 마지막에 별도 타임스탬프 파일로 저장하고, SAVED 로그를 출력
         """
-        companies = ExcelInputHandler.read_companies(self.input_file)
-        key_specs = ExcelInputHandler.read_keywords(self.input_file)
+   
+        # --- 회사: CLI > Excel ---
+        if self.args.companies is not None:
+            companies = [s.strip() for s in str(self.args.companies).split(",") if s.strip()]
+        else:
+            companies = ExcelInputHandler.read_companies(self.input)
+
+        # --- 키워드: CLI > Excel ---
+        if self.args.keywords is not None:
+            key_specs = [{"group": "", "keyword": s}
+                         for s in str(self.args.keywords).split(",") if s.strip()]
+        else:
+            key_specs = ExcelInputHandler.read_keywords(self.input)
+
+        # 만약 엑셀에서도 못 읽었다면 → CLI 인자 fallback
+        if not key_specs and self.args.keywords:
+            key_specs = [{"group": "", "keyword": s} for s in self.args.keywords.split(",") if s.strip()]
+
 
         # Config에서 기간 파라미터 도출(YYYY-MM-DD 형태로 정규화 시도)
-        date_from_raw = self.excel_config.get("date_from")
-        date_to_raw   = self.excel_config.get("date_to")
+        date_from_raw = self.args.start or self.excel_config.get("date_from")
+        date_to_raw   = self.args.end   or self.excel_config.get("date_to")
         date_from = ExcelInputHandler._normalize_date_ymd(date_from_raw)
         date_to   = ExcelInputHandler._normalize_date_ymd(date_to_raw)
 
@@ -75,6 +97,7 @@ class BatchNewsCrawler:
                     continue
 
                 query = f"{company} {kw}".strip() if company else kw
+                print(f"[CALL] query='{query}'  from={date_from} to={date_to}")
                 try:
                     # 끝까지 혹은 기간 하한 도달 시까지 수집
                     raw_items = self.crawler.search_news_multiple_pages(
@@ -102,9 +125,13 @@ class BatchNewsCrawler:
 
                     self.results_by_keyword[kw].extend(articles)
                     self.results_by_company.setdefault(company, {}).setdefault(kw, []).extend(articles)
-
+                    print(f"[DBG] args.companies={self.args.companies!r}, args.keywords={self.args.keywords!r}")
+                    print(f"[DBG] companies={companies}")
+                    print(f"[DBG] keywords={[d.get('keyword') for d in key_specs]}  (n={len(key_specs)})")
+                    print(f"[DBG] date_from={date_from} date_to={date_to}")
                 except Exception as e:
                     logger.error(f"[{company}] {group}/{kw} 에러: {e}", exc_info=True)
+
 
         self._save_results(date_from=date_from, date_to=date_to)
         return self.results_by_keyword
@@ -112,7 +139,7 @@ class BatchNewsCrawler:
     def _save_results(self, *, date_from: Optional[str], date_to: Optional[str]) -> None:
         """
         항상 별도 파일(output/news_output_타임스탬프.xlsx)에 저장.
-        Streamlit 앱이 파싱할 수 있도록 'SAVED_FILE: <abs_path>' 한 줄 출력.
+        Streamlit 앱이 파싱할 수 있도록 'SAVED: <abs_path>' 한 줄 출력.
         """
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         out_path = self.output_dir / f"news_output_{ts}.xlsx"
@@ -128,7 +155,8 @@ class BatchNewsCrawler:
         )
 
         # 앱이 이 줄을 정규식으로 잡아 경로를 인식함
-        print(f"SAVED_FILE: {out_path.resolve()}")
+        print(f"SAVED: {out_path.resolve()}")
+        print("final: "+now_kst())   
 
     def close(self):
         if self.crawler:
@@ -143,6 +171,7 @@ class ExcelInputHandler:
 
     @staticmethod
     def read_companies(filepath: str, sheet_name: str = "Company", column: str = "A", start_row: int = 2) -> List[str]:
+    
         df = pd.read_excel(filepath, sheet_name=sheet_name, header=None)
         col_idx = ord(column.upper()) - ord("A")
         return [str(v).strip() for v in df.iloc[start_row - 1:, col_idx].dropna() if str(v).strip()]
@@ -421,3 +450,46 @@ def save_keyword_results(
         date_to=date_to,
     )
     return str(filepath)
+# 파일 끝에 추가
+if __name__ == "__main__":
+    print("batch: "+now_kst()) 
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input")
+    parser.add_argument("--companies", type=str)
+    parser.add_argument("--keywords", type=str)
+    parser.add_argument("--start", type=str)
+    parser.add_argument("--end", type=str)
+    parser.add_argument("--output-sheet", default="output")
+    parser.add_argument("--inplace", action="store_true")
+
+    
+    args = parser.parse_args()
+    
+    def _norm_ymd(s: str | None) -> str | None:
+        if not s: return None
+        from datetime import datetime
+        for fmt in ("%Y-%m-%d", "%Y.%m.%d", "%Y/%m/%d", "%Y%m%d"):
+            try:
+                return datetime.strptime(str(s)[:10], fmt).strftime("%Y-%m-%d")
+            except Exception:
+                pass
+        return None
+
+    cli_config = {
+        # 필요시 추가할 수 있는 값들 (딜레이/타임아웃 등도 CLI에 넣으면 같이 넘기자)
+        "date_from": _norm_ymd(getattr(args, "start", None)),
+        "date_to":   _norm_ymd(getattr(args, "end",   None)),
+        # "min_delay": float(getattr(args, "min_delay", 1.0)),
+        # "max_delay": float(getattr(args, "max_delay", 2.0)),
+        # "timeout":   float(getattr(args, "timeout", 10.0)),
+        # "max_page":  int(getattr(args, "max_page", 3)),
+    }
+
+    app = BatchNewsCrawler(
+        input=args.input,
+        config=cli_config,     # ← 엑셀 대신 CLI 구성 딕셔너리 전달
+        args=args,
+    )
+    app.run()
+    app.close()

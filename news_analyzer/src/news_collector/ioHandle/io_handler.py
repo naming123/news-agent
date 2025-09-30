@@ -42,6 +42,9 @@ def _article_to_row(a: Any, fallback_keyword: str = "") -> dict:
         "date_to":        g(a, "date_to", ""),
     }
 
+
+
+
 class ExcelInputHandler:
     """엑셀 입력 처리"""
 
