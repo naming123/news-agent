@@ -12,6 +12,7 @@ from datetime import datetime, date, timezone, timedelta
 from email.utils import parsedate_to_datetime
 import requests
 import html
+from pathlib import Path
 
 
 class NaverNewsCrawler:
@@ -19,21 +20,35 @@ class NaverNewsCrawler:
 
     BASE_URL = "https://openapi.naver.com/v1/search/news.json"
 
+
     def __init__(self, client_id: str | None = None, client_secret: str | None = None, timeout: float = 10.0):
-        # .env 로딩은 선택사항 (없어도 동작)
+        # 1) .env 로드: 어디서 실행하든 루트 .env를 찾게
         try:
-            from dotenv import load_dotenv  # type: ignore
-            load_dotenv()
+            from dotenv import load_dotenv, find_dotenv  # type: ignore
+            dotenv_path = find_dotenv(filename=".env", usecwd=True)
+            if not dotenv_path:
+                # 파일 기준으로 상위 폴더들에서도 탐색
+                here = Path(__file__).resolve()
+                for p in [here.parent, here.parent.parent, here.parent.parent.parent]:
+                    cand = p / ".env"
+                    if cand.exists():
+                        dotenv_path = str(cand)
+                        break
+            if dotenv_path:
+                load_dotenv(dotenv_path=dotenv_path, override=True)
         except Exception:
             pass
 
-        self.client_id = client_id or os.getenv("NAVER_CLIENT_ID")
-        self.client_secret = client_secret or os.getenv("NAVER_CLIENT_SECRET")
+        # 2) 키 읽기 + 공백/개행 방지
+        env_id = (os.getenv("NAVER_CLIENT_ID") or "").strip()
+        env_secret = (os.getenv("NAVER_CLIENT_SECRET") or "").strip()
+
+        self.client_id = (client_id or env_id).strip()
+        self.client_secret = (client_secret or env_secret).strip()
+
         if not self.client_id or not self.client_secret:
             raise ValueError(
-                "네이버 API 키가 없습니다. "
-                ".env에 NAVER_CLIENT_ID / NAVER_CLIENT_SECRET 설정하거나 "
-                "생성자 인자로 전달하세요."
+                "네이버 API 키가 없습니다. .env(NAVER_CLIENT_ID, NAVER_CLIENT_SECRET) 또는 생성자 인자 확인"
             )
 
         self.session = requests.Session()

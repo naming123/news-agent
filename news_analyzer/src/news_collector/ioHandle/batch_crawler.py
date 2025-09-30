@@ -4,49 +4,140 @@
 from __future__ import annotations
 
 import logging
-from pathlib import Path
-from datetime import datetime
-from typing import List, Dict, Any, Optional
 import re
+from collections import defaultdict
+from pathlib import Path
+from datetime import datetime, date
+from typing import List, Dict, Any, Optional
 
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
-from openpyxl.utils import get_column_letter
 
-from ..config.models import NewsArticle
+from ..collector.crawler import NaverNewsCrawler
+from ..config.models import NewsArticle, CrawlerConfig  # ← 누락 보강
 
 logger = logging.getLogger(__name__)
 
+# =========================
+# Batch Crawler
+# =========================
+class BatchNewsCrawler:
+    def __init__(
+        self,
+        input_file: str,
+        output_dir: str = "./output",
+        config: Optional[CrawlerConfig] = None,
+        *,
+        inplace: bool = False,           # 인자 유지(사용 안 함)
+        output_sheet: str = "output",    # 인자 유지(사용 안 함)
+    ):
+        self.input_file = input_file
+        self.output_dir = Path(output_dir); self.output_dir.mkdir(parents=True, exist_ok=True)
 
-def _article_to_row(a: Any, fallback_keyword: str = "") -> dict:
-    """
-    NewsArticle(객체)든 dict든 안전하게 행으로 변환.
-    프로젝트마다 필드명이 다를 수 있어 최대한 넓게 커버.
-    """
-    # dict/객체 양쪽 케이스 방어
-    def g(obj, name, default=""):
-        if isinstance(obj, dict):
-            return obj.get(name, default)
-        return getattr(obj, name, default)
+        self.excel_config = ExcelInputHandler.read_config(input_file)
+        self.crawler_config = config or CrawlerConfig(
+            max_retries=self.excel_config.get("max_retries", 3),
+            timeout=self.excel_config.get("timeout", 10),
+            min_delay=self.excel_config.get("min_delay", 1.0),
+            max_delay=self.excel_config.get("max_delay", 2.0),
+        )
 
-    return {
-        "회사":       g(a, "company"),
-        "키워드":     g(a, "keyword", fallback_keyword),
-        "그룹":       g(a, "group"),
-        "제목":       g(a, "title"),
-        "링크":       g(a, "link") or g(a, "url"),
-        "원문링크":   g(a, "original_link") or g(a, "originallink"),
-        "언론사":     g(a, "press") or g(a, "source"),
-        "날짜":       g(a, "date") or g(a, "pub_date") or g(a, "pubDate"),
-        "요약":       g(a, "summary") or g(a, "description"),
-        "검색쿼리":   g(a, "search_query"),
-        "수집시각":   g(a, "crawl_time") or datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "date_from":  g(a, "date_from", ""),
-        "date_to":    g(a, "date_to", ""),
-    }
+        self.crawler = NaverNewsCrawler()
+        self.results_by_keyword: Dict[str, List[NewsArticle | Dict[str, Any]]] = defaultdict(list)
+        self.results_by_company: Dict[str, Dict[str, List[NewsArticle | Dict[str, Any]]]] = defaultdict(dict)
+
+        # 저장 관련 옵션(호환용. 실제 저장은 별도 파일에만)
+        self.inplace = inplace
+        self.output_sheet = output_sheet
+
+    def run(self) -> Dict[str, List[NewsArticle | Dict[str, Any]]]:
+        """
+        - Company 시트 × ESG 키워드 조합으로 네이버 뉴스 검색
+        - 기간 필터(date_from/date_to) 적용
+        - 결과는 self.results_by_keyword 에 {keyword: [기사...]} 형태로 누적
+        - 마지막에 별도 타임스탬프 파일로 저장하고, SAVED_FILE 로그를 출력
+        """
+        companies = ExcelInputHandler.read_companies(self.input_file)
+        key_specs = ExcelInputHandler.read_keywords(self.input_file)
+
+        # Config에서 기간 파라미터 도출(YYYY-MM-DD 형태로 정규화 시도)
+        date_from_raw = self.excel_config.get("date_from")
+        date_to_raw   = self.excel_config.get("date_to")
+        date_from = ExcelInputHandler._normalize_date_ymd(date_from_raw)
+        date_to   = ExcelInputHandler._normalize_date_ymd(date_to_raw)
+
+        for company in companies:
+            for spec in key_specs:
+                group = spec.get("group", "")
+                kw    = spec.get("keyword", "")
+                if not kw:
+                    continue
+
+                query = f"{company} {kw}".strip() if company else kw
+                try:
+                    # 끝까지 혹은 기간 하한 도달 시까지 수집
+                    raw_items = self.crawler.search_news_multiple_pages(
+                        query=query,
+                        max_results=None,             # None → 끝까지/기간조건
+                        date_from=date_from,
+                        date_to=date_to,
+                    )
+                    # dict 리스트를 프로젝트 표준 dict로 변환
+                    formatted = self.crawler.format_news_data(raw_items, query)
+
+                    # NewsArticle로 감싸도 되고(dict도 허용). 메타 주입
+                    articles: List[NewsArticle | Dict[str, Any]] = []
+                    for item in formatted:
+                        a = {
+                            **item,                      # title/description/link/pub_date...
+                            "company": company,
+                            "keyword": kw,
+                            "group": group,
+                            "search_query": query,
+                            "date_from": date_from or "",
+                            "date_to": date_to or "",
+                        }
+                        articles.append(a)
+
+                    self.results_by_keyword[kw].extend(articles)
+                    self.results_by_company.setdefault(company, {}).setdefault(kw, []).extend(articles)
+
+                except Exception as e:
+                    logger.error(f"[{company}] {group}/{kw} 에러: {e}", exc_info=True)
+
+        self._save_results(date_from=date_from, date_to=date_to)
+        return self.results_by_keyword
+
+    def _save_results(self, *, date_from: Optional[str], date_to: Optional[str]) -> None:
+        """
+        항상 별도 파일(output/news_output_타임스탬프.xlsx)에 저장.
+        Streamlit 앱이 파싱할 수 있도록 'SAVED_FILE: <abs_path>' 한 줄 출력.
+        """
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        out_path = self.output_dir / f"news_output_{ts}.xlsx"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+
+        ExcelOutputHandler.save_results_to_sheet(
+            results_by_keyword=self.results_by_keyword,
+            file_path=str(out_path),
+            sheet_name="output",
+            replace=True,
+            date_from=date_from,
+            date_to=date_to,
+        )
+
+        # 앱이 이 줄을 정규식으로 잡아 경로를 인식함
+        print(f"SAVED_FILE: {out_path.resolve()}")
+
+    def close(self):
+        if self.crawler:
+            self.crawler.close()
 
 
+# =========================
+# Input Handlers
+# =========================
 class ExcelInputHandler:
     """엑셀 입력 처리"""
 
@@ -73,11 +164,23 @@ class ExcelInputHandler:
         return out
 
     @staticmethod
+    def _normalize_date_ymd(v: Optional[str]) -> Optional[str]:
+        if not v:
+            return None
+        s = str(v).strip()
+        for fmt in ("%Y-%m-%d", "%Y.%m.%d", "%Y/%m/%d", "%Y%m%d"):
+            try:
+                return datetime.strptime(s[:10], fmt).strftime("%Y-%m-%d")
+            except Exception:
+                pass
+        return None
+
+    @staticmethod
     def read_config(filepath: str, sheet_name: str = "Config") -> Dict[str, Any]:
         defaults = {"max_pages": 3, "min_delay": 1.0, "max_delay": 2.0}
         try:
             df = pd.read_excel(filepath, sheet_name=sheet_name)
-            config = {}
+            config: Dict[str, Any] = {}
             for _, row in df.iterrows():
                 if "parameter" in df.columns and "value" in df.columns:
                     param = str(row["parameter"]).strip()
@@ -92,7 +195,7 @@ class ExcelInputHandler:
                             value = str(value).lower() in ["true", "1", "yes"]
                     config[param] = value
 
-            # 연 단위 기간 처리
+            # 연 단위 기간 처리 → date_from/date_to로 보정
             if "date_from" not in config and "date_to" not in config:
                 if "year" in config:
                     y = int(config["year"])
@@ -103,6 +206,12 @@ class ExcelInputHandler:
                     config["date_from"] = f"{sy}.01.01"
                     config["date_to"] = f"{ey}.12.31"
 
+            # 표준 포맷(YYYY-MM-DD)로 통일
+            if config.get("date_from"):
+                config["date_from"] = ExcelInputHandler._normalize_date_ymd(config["date_from"])
+            if config.get("date_to"):
+                config["date_to"] = ExcelInputHandler._normalize_date_ymd(config["date_to"])
+
             for k, v in defaults.items():
                 config.setdefault(k, v)
             return config
@@ -111,50 +220,50 @@ class ExcelInputHandler:
             return defaults
 
 
+# =========================
+# Output Handlers (새 스키마)
+# =========================
 class ExcelOutputHandler:
-    """엑셀 출력 처리 (B안: date_from/date_to 지원)"""
+    """엑셀 출력 처리 (새 스키마: ESG/Theme/Key Issue/...)"""
 
     @staticmethod
-    def save_results(
-        results_by_keyword: Dict[str, List[Any]],
-        file_path: str,
-        date_from: Optional[str] = None,
-        date_to: Optional[str] = None,
-    ) -> None:
-        """
-        키워드별 결과를 엑셀로 저장.
-        - 각 키워드별로 개별 시트를 생성
-        - 'meta' 시트에 실행 메타데이터(date_from/date_to 등) 기록
-        - 기존 파일이 있으면 덮어쓰기(새 파일 생성)
-        """
-        path = Path(file_path)
-        path.parent.mkdir(parents=True, exist_ok=True)
+    def _safe_get(obj: Any, key: str, default: Any = "") -> Any:
+        if isinstance(obj, dict):
+            return obj.get(key, default)
+        return getattr(obj, key, default)
 
-        with pd.ExcelWriter(path, engine="openpyxl") as writer:
-            # meta sheet
-            meta_df = pd.DataFrame(
-                [
-                    {"key": "exported_at", "value": datetime.now().strftime("%Y-%m-%d %H:%M:%S")},
-                    {"key": "date_from",   "value": date_from or ""},
-                    {"key": "date_to",     "value": date_to or ""},
-                    {"key": "keywords",    "value": ", ".join(results_by_keyword.keys()) if results_by_keyword else ""},
-                    {"key": "path",        "value": str(path.resolve())},
-                ]
-            )
-            meta_df.to_excel(writer, index=False, sheet_name="meta")
+    @staticmethod
+    def _derive_esg(group: str, fallback_esg: str = "") -> str:
+        """group이나 esg필드로 E/S/G/F 추론 (정확 분류가 있으면 그대로 사용)"""
+        if fallback_esg:
+            return str(fallback_esg).strip()
+        g = (group or "").strip().upper()
+        if g.startswith("E"): return "E"
+        if g.startswith("S"): return "S"
+        if g.startswith("G"): return "G"
+        if g.startswith("F") or "KOSELF" in g: return "F"
+        return ""
 
-            # per-keyword sheets
-            if not results_by_keyword:
-                pd.DataFrame([]).to_excel(writer, index=False, sheet_name="output")
-                return
-
-            for kw, items in results_by_keyword.items():
-                rows = [_article_to_row(a, fallback_keyword=kw) for a in items]
-                df = pd.DataFrame(rows)
-                sheet = ExcelOutputHandler._clean_sheet_name(kw or "output")
-                if df.empty:
-                    df = pd.DataFrame(columns=list(_article_to_row({}, kw).keys()))
-                df.to_excel(writer, index=False, sheet_name=sheet)
+    @staticmethod
+    def _yyyymmdd(any_date) -> str:
+        """다양한 입력 → YYYYMMDD 문자열"""
+        if any_date in (None, ""):
+            return ""
+        if isinstance(any_date, datetime):
+            return any_date.strftime("%Y%m%d")
+        if isinstance(any_date, date):
+            return any_date.strftime("%Y%m%d")
+        s = str(any_date)
+        for fmt in ("%Y-%m-%d", "%Y.%m.%d", "%Y/%m/%d", "%Y%m%d"):
+            try:
+                return datetime.strptime(s[:10], fmt).strftime("%Y%m%d")
+            except Exception:
+                pass
+        try:
+            from email.utils import parsedate_to_datetime
+            return parsedate_to_datetime(s).strftime("%Y%m%d")
+        except Exception:
+            return s
 
     @staticmethod
     def save_results_to_sheet(
@@ -166,21 +275,68 @@ class ExcelOutputHandler:
         date_to: Optional[str] = None,
     ) -> None:
         """
-        모든 키워드 결과를 하나의 시트로 합쳐서 저장(인플레이스).
-        - 파일이 있으면 해당 시트만 교체(replace=True)
-        - 'meta' 시트를 현재 실행 정보로 갱신/생성
+        결과를 'output' 시트에 새 스키마로 저장한다.
+        새 스키마 컬럼:
+        [esg, Theme (주제), Key Issue (핵심 이슈), 뉴스 키워드 후보, 부정 ESG 키워드, 부정점수,
+         뉴스 보도날짜(YYYYMMDD), 기사제목, 언론사, 기사 URL, 회사명, 고유번호, 종목코드]
+        - 부정점수는 요청대로 1로 고정
         """
-        rows_all: List[dict] = []
-        for kw, items in results_by_keyword.items():
-            for a in items:
-                rows_all.append(_article_to_row(a, fallback_keyword=kw))
-        df = pd.DataFrame(rows_all)
-        if df.empty:
-            df = pd.DataFrame(columns=list(_article_to_row({}, "").keys()))
+        rows: List[dict] = []
+        sg = ExcelOutputHandler._safe_get
+        for kw, items in (results_by_keyword or {}).items():
+            for a in (items or []):
+                esg        = sg(a, "esg", "")
+                group      = sg(a, "group", "")
+                theme      = sg(a, "theme", group)
+                key_issue  = sg(a, "key_issue", sg(a, "keyword", kw))
+                news_kw    = sg(a, "keyword", kw)
+                neg_terms  = sg(a, "neg_terms", "")
+                title      = sg(a, "title", "")
+                press      = sg(a, "press", sg(a, "source", ""))
+                url        = sg(a, "link", sg(a, "url", ""))
+                company    = sg(a, "company", "")
+                corp_id    = sg(a, "corp_id", "")
+                ticker     = sg(a, "ticker", "")
+                raw_date   = sg(a, "date", "") or sg(a, "pub_date", "") or sg(a, "pubDate", "")
+                ymd        = ExcelOutputHandler._yyyymmdd(raw_date)
+
+                if isinstance(neg_terms, (list, tuple, set)):
+                    neg_terms = ", ".join(map(str, neg_terms))
+
+                esg_final = ExcelOutputHandler._derive_esg(group, fallback_esg=str(esg).strip())
+
+                rows.append({
+                    "esg": esg_final,
+                    "Theme (주제)": theme,
+                    "Key Issue (핵심 이슈)": key_issue,
+                    "뉴스 키워드 후보": news_kw,
+                    "부정 ESG 키워드": neg_terms,
+                    "부정점수": 1,  # ← 요청대로 1 고정
+                    "뉴스 보도날짜(YYYYMMDD)": ymd,
+                    "기사제목": title,
+                    "언론사": press,
+                    "기사 URL": url,
+                    "회사명": company,
+                    "고유번호": corp_id,
+                    "종목코드": ticker,
+                })
+
+        df = pd.DataFrame(rows)
+        # 열 순서 보장 및 누락 보정
+        desired = [
+            "esg", "Theme (주제)", "Key Issue (핵심 이슈)", "뉴스 키워드 후보",
+            "부정 ESG 키워드", "부정점수", "뉴스 보도날짜(YYYYMMDD)",
+            "기사제목", "언론사", "기사 URL", "회사명", "고유번호", "종목코드",
+        ]
+        for c in desired:
+            if c not in df.columns:
+                df[c] = "" if c != "부정점수" else 1
+        df = df[desired]
 
         p = Path(file_path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+
         if p.exists():
-            # 기존 파일: 대상 시트 교체 + meta 갱신
             book = load_workbook(p)
             if sheet_name in book.sheetnames and replace:
                 book.remove(book[sheet_name])
@@ -197,13 +353,11 @@ class ExcelOutputHandler:
                         {"key": "sheet_name", "value": sheet_name},
                     ]
                 )
-                # meta 시트 교체
                 if "meta" in writer.book.sheetnames and replace:
                     writer.book.remove(writer.book["meta"])
                 meta_df.to_excel(writer, index=False, sheet_name="meta")
                 writer.save()
         else:
-            # 새 파일 생성: output + meta 생성
             with pd.ExcelWriter(p, engine="openpyxl") as writer:
                 df.to_excel(writer, index=False, sheet_name=sheet_name)
                 meta_df = pd.DataFrame(
@@ -217,34 +371,9 @@ class ExcelOutputHandler:
                 )
                 meta_df.to_excel(writer, index=False, sheet_name="meta")
 
-    @staticmethod
-    def _clean_sheet_name(name: str, max_length: int = 31) -> str:
-        """엑셀 시트명 정리"""
-        invalid = r'[\/\\\?\*\[\]\:]'
-        safe = re.sub(invalid, "_", str(name)).strip()
-        if len(safe) > max_length:
-            safe = safe[:max_length - 3] + "..."
-        return safe or "Sheet"
-
-    @staticmethod
-    def _dedupe_sheet_name(base: str, used: set, max_length: int = 31) -> str:
-        """중복 시트명 처리"""
-        if base not in used:
-            return base
-        i = 2
-        while True:
-            suffix = f"_{i}"
-            if len(base) + len(suffix) <= max_length:
-                candidate = base + suffix
-            else:
-                candidate = base[:max_length - len(suffix)] + suffix
-            if candidate not in used:
-                return candidate
-            i += 1
-
+    # ------- (아래 보조들: 스타일/유틸) -------
     @staticmethod
     def _apply_summary_style(ws) -> None:
-        """요약 시트 스타일 적용"""
         try:
             header_font = Font(bold=True, color="FFFFFF")
             header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
@@ -261,13 +390,12 @@ class ExcelOutputHandler:
     def _autosize_columns(ws, max_width: int = 50):
         for column in ws.columns:
             length = max((len(str(cell.value)) if cell.value else 0) for cell in column)
-            col_letter = column[0].column_letter
-            ws.column_dimensions[col_letter].width = min(length + 2, max_width)
+            ws.column_dimensions[column[0].column_letter].width = min(length + 2, max_width)
 
 
-# --------------------------------------------------
-# 편의 유틸: 키워드별 결과를 타임스탬프 파일로 저장
-# --------------------------------------------------
+# =========================
+# 편의 유틸 (선택)
+# =========================
 def save_keyword_results(
     articles_by_keyword: Dict[str, List[NewsArticle]],
     output_dir: str,
@@ -276,7 +404,7 @@ def save_keyword_results(
     date_to: Optional[str] = None,
 ) -> str:
     """
-    크롤링 결과를 엑셀로 저장하고 경로 반환
+    크롤링 결과를 새 스키마로 저장하고 파일 경로 반환
     """
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -284,9 +412,11 @@ def save_keyword_results(
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filepath = output_path / f"{filename_prefix}_{timestamp}.xlsx"
 
-    ExcelOutputHandler.save_results(
+    ExcelOutputHandler.save_results_to_sheet(
         results_by_keyword=articles_by_keyword,
         file_path=str(filepath),
+        sheet_name="output",
+        replace=True,
         date_from=date_from,
         date_to=date_to,
     )

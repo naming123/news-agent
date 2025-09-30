@@ -342,8 +342,41 @@ class ESGNewsApp:
             )
             self.df = self.sheets[selected_sheet].copy()
 
+        # --- 새 스키마 → 표준 컬럼명 매핑 ---
+        # 새 스키마 열: 뉴스 보도날짜(YYYYMMDD), 기사제목, 기사 URL, 뉴스 키워드 후보, 회사명, 언론사, esg, Theme (주제) ...
+        colmap = {
+            "뉴스 보도날짜(YYYYMMDD)": "날짜",
+            "기사제목": "제목",
+            "기사 URL": "링크",
+            "뉴스 키워드 후보": "키워드",
+            "회사명": "회사",
+            # "언론사"는 동일
+        }
+        for old, new in colmap.items():
+            if old in self.df.columns and new not in self.df.columns:
+                self.df[new] = self.df[old]
+
+        # 날짜 파싱 (YYYYMMDD 우선, 안 되면 자동 파싱)
         if "날짜" in self.df.columns:
-            self.df["날짜"] = pd.to_datetime(self.df["날짜"], errors="coerce")
+            s = self.df["날짜"].astype(str)
+            # 우선 YYYYMMDD 시도
+            parsed = pd.to_datetime(s, format="%Y%m%d", errors="coerce")
+            # 실패분 자동 파싱 보강
+            if parsed.isna().any():
+                fallback = pd.to_datetime(s[parsed.isna()], errors="coerce")
+                parsed.loc[parsed.isna()] = fallback
+            self.df["날짜"] = parsed
+
+            # 파생열
+            self.df["연도"] = self.df["날짜"].dt.year
+            self.df["년월"] = self.df["날짜"].dt.to_period("M").astype(str)
+
+        # ESG 정규화 (E/S/G/F만 허용)
+        if "esg" in self.df.columns:
+            def _norm_esg(x):
+                s = (str(x) if pd.notna(x) else "").strip().upper()
+                return s if s in {"E", "S", "G", "F"} else ""
+            self.df["esg"] = self.df["esg"].map(_norm_esg)
 
         with col2:
             st.metric("총 기사 수", f"{len(self.df):,}개")
@@ -351,46 +384,54 @@ class ESGNewsApp:
         with col3:
             st.metric("컬럼 수", f"{len(self.df.columns)}개")
 
+
     # ---------- Filters ----------
     def render_filters(self):
         assert self.df is not None
         st.subheader("🔍 필터 설정")
-        c1, c2, c3 = st.columns(3)
+        c1, c2, c3, c4 = st.columns(4)
 
+        # 1) 날짜 범위
         with c1:
             if "날짜" in self.df.columns and self.df["날짜"].notna().any():
-                min_date = self.df["날짜"].min().date()
-                max_date = self.df["날짜"].max().date()
-                date_range = st.date_input(
-                    "날짜 범위",
-                    value=(min_date, max_date),
-                    min_value=min_date,
-                    max_value=max_date,
-                )
-                if isinstance(date_range, tuple) and len(date_range) == 2:
+                mind = self.df["날짜"].min().date()
+                maxd = self.df["날짜"].max().date()
+                dr = st.date_input("날짜 범위", value=(mind, maxd), min_value=mind, max_value=maxd)
+                if isinstance(dr, tuple) and len(dr) == 2:
                     self.df = self.df[
-                        (self.df["날짜"].dt.date >= date_range[0]) &
-                        (self.df["날짜"].dt.date <= date_range[1])
+                        (self.df["날짜"].dt.date >= dr[0]) & (self.df["날짜"].dt.date <= dr[1])
                     ]
 
+        # 2) ESG (E/S/G/F)
         with c2:
-            if "키워드" in self.df.columns:
-                kws = self.df["키워드"].dropna().unique().tolist()
-                if kws:
-                    sel = st.multiselect("키워드", kws, default=kws)
-                    if sel:
-                        self.df = self.df[self.df["키워드"].isin(sel)]
+            if "esg" in self.df.columns:
+                esg_vals = [x for x in self.df["esg"].dropna().unique() if x]
+                esg_sel = st.multiselect("ESG 대분류", esg_vals, default=esg_vals)
+                if esg_sel:
+                    self.df = self.df[self.df["esg"].isin(esg_sel)]
 
+        # 3) Theme (주제)
         with c3:
-            if "언론사" in self.df.columns:
-                src = self.df["언론사"].dropna().unique().tolist()
-                if src:
-                    default_src = src[:10] if len(src) > 10 else src
-                    sel = st.multiselect("언론사", src, default=default_src)
-                    if sel:
-                        self.df = self.df[self.df["언론사"].isin(sel)]
+            col = "Theme (주제)"
+            if col in self.df.columns:
+                opts = self.df[col].dropna().astype(str).unique().tolist()
+                default = opts if len(opts) <= 12 else opts[:12]
+                theme_sel = st.multiselect("Theme(주제)", opts, default=default)
+                if theme_sel:
+                    self.df = self.df[self.df[col].astype(str).isin(theme_sel)]
+
+        # 4) 회사명
+        with c4:
+            if "회사" in self.df.columns:  # ← 표준명(회사)로 필터
+                comps = self.df["회사"].dropna().astype(str).unique().tolist()
+                default = comps if len(comps) <= 12 else comps[:12]
+                comp_sel = st.multiselect("회사명", comps, default=default)
+                if comp_sel:
+                    self.df = self.df[self.df["회사"].astype(str).isin(comp_sel)]
 
         st.info(f"🔎 필터링 결과: {len(self.df):,}개 기사")
+
+
 
     # ---------- Preview ----------
     def render_preview(self):
@@ -408,6 +449,7 @@ class ESGNewsApp:
         viz_opts = st.multiselect(
             "시각화 선택 (다중 선택 가능)",
             ["📅 년도별 추이", "🔑 키워드별 분포", "📆 월별 추이", "📰 언론사별 분포", "☁️ 워드클라우드"],
+            # default=["📅 년도별 추이", "☁️ 워드클라우드"],
             default=["📅 년도별 추이", "☁️ 워드클라우드"],
         )
 

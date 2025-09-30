@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 import re
-
+from openpyxl import load_workbook
 import pandas as pd
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
@@ -196,42 +196,158 @@ class ExcelOutputHandler:
             
         except Exception as e:
             logger.warning(f"Could not apply styles: {str(e)}")
+    # ExcelOutputHandler.save_results_to_sheet(...) 전체 교체
     @staticmethod
-    def save_results_to_sheet(results_by_keyword: dict, file_path: str, sheet_name: str = "output", replace: bool = True):
-        """키워드별 결과를 단일 시트로 합쳐 input.xlsx의 특정 시트를 교체 저장."""
-        # (1) dict -> DataFrame 풀기 (필요에 따라 정렬/칼럼 순서 조정)
+    def save_results_to_sheet(
+        results_by_keyword: dict,
+        file_path: str,
+        sheet_name: str = "output",
+        replace: bool = True,
+    ):
+        """
+        결과를 'output' 시트에 새 스키마로 저장한다.
+        새 스키마 컬럼:
+        [esg, Theme (주제), Key Issue (핵심 이슈), 뉴스 키워드 후보, 부정 ESG 키워드, 부정점수,
+        뉴스 보도날짜(YYYYMMDD), 기사제목, 언론사, 기사 URL, 회사명, 고유번호, 종목코드]
+        - 결과 원소 a(dict/객체)에서 가능한 필드를 사용하고, 없으면 안전한 추론/빈칸 처리
+        """
+
+        def _safe_get(obj, key, default=""):
+            if isinstance(obj, dict):
+                return obj.get(key, default)
+            return getattr(obj, key, default)
+### 이거 정확히 분류된거로 갖고 올 필요 있음
+        def _derive_esg(group: str, fallback_esg: str = "") -> str:
+            """group이나 esg필드로 E/S/G/F 추론"""
+            if fallback_esg:
+                return str(fallback_esg).strip()
+            g = (group or "").strip().upper()
+            if g.startswith("E"): return "E"
+            if g.startswith("S"): return "S"
+            if g.startswith("G"): return "G"
+            if "KOSELF" in g or g.startswith("F"): return "F"
+            return "IDK"  # 모르면 빈칸
+
+        def _yyyymmdd(any_date) -> str:
+            """다양한 형태(YYYY-MM-DD, YYYY.MM.DD, datetime/date 등)를 YYYYMMDD 문자열로"""
+            from datetime import datetime, date
+            if any_date in (None, ""):
+                return ""
+            if isinstance(any_date, datetime):
+                return any_date.strftime("%Y%m%d")
+            if isinstance(any_date, date):
+                return any_date.strftime("%Y%m%d")
+
+            s = str(any_date)
+            # 흔한 포맷부터 시도
+            for fmt in ("%Y-%m-%d", "%Y.%m.%d", "%Y/%m/%d", "%Y%m%d"):
+                try:
+                    return datetime.strptime(s[:10], fmt).strftime("%Y%m%d")
+                except Exception:
+                    pass
+            # 네이버 pubDate 같은 RFC 2822가 올 수도 있음
+            try:
+                from email.utils import parsedate_to_datetime
+                dt = parsedate_to_datetime(s)
+                return dt.strftime("%Y%m%d")
+            except Exception:
+                return s  # 마지막 보호
+
+        # 1) rows 생성 (스키마 정규화)
         rows = []
-        for kw, articles in results_by_keyword.items():
-            for a in articles:
+        for kw, articles in (results_by_keyword or {}).items():
+            for a in (articles or []):
+                # 원천 필드
+                esg           = _safe_get(a, "esg", "")              # 있으면 사용
+                group         = _safe_get(a, "group", "")            # Theme(주제) 대용
+                theme         = _safe_get(a, "theme", group)         # 'Theme (주제)'
+                key_issue     = _safe_get(a, "key_issue", _safe_get(a, "keyword", kw))
+                news_kw_cand  = _safe_get(a, "keyword", kw)          # '뉴스 키워드 후보'
+                neg_terms     = _safe_get(a, "neg_terms", "")        # "부정 ESG 키워드" (리스트면 join)
+                neg_score     = _safe_get(a, "neg_score", 0)         # "부정점수" (없으면 0)
+                title         = _safe_get(a, "title", "")
+                press         = _safe_get(a, "press", _safe_get(a, "source", ""))
+                url           = _safe_get(a, "link", _safe_get(a, "url", ""))
+                company       = _safe_get(a, "company", "")
+                corp_id       = _safe_get(a, "corp_id", "")
+                ticker        = _safe_get(a, "ticker", "")
+
+                # 날짜 후보: date > pub_date > pubDate > crawl_time(없으면 빈칸)
+                raw_date = (
+                    _safe_get(a, "date", "")
+                    or _safe_get(a, "pub_date", "")
+                    or _safe_get(a, "pubDate", "")
+                )
+                ymd = _yyyymmdd(raw_date)
+
+                # 타입 보정
+                if isinstance(neg_terms, (list, tuple, set)):
+                    neg_terms = ", ".join(map(str, neg_terms))
+                try:
+                    neg_score = int(neg_score)
+                except Exception:
+                    # 숫자로 못 바꾸면 0
+                    neg_score = 0
+
+                # ESG 추론 (없으면 group으로)
+                esg_final = _derive_esg(group, fallback_esg=str(esg).strip())
+
                 rows.append({
-                    "회사": getattr(a, "company", ""),
-                    "키워드": getattr(a, "keyword", kw),
-                    "그룹": getattr(a, "group", ""),
-                    "제목": a.title,
-                    "링크": a.link,
-                    "언론사": a.press,
-                    "날짜": a.date,
-                    "요약": a.summary,
-                    "검색쿼리": getattr(a, "search_query", ""),
-                    "date_from": getattr(a, "date_from", None),
-                    "date_to": getattr(a, "date_to", None),
+                    "esg": esg_final,
+                    "Theme (주제)": theme,
+                    "Key Issue (핵심 이슈)": key_issue,
+                    "뉴스 키워드 후보": news_kw_cand,
+                    "부정 ESG 키워드": neg_terms,
+                    "부정점수": -1, # neg_score
+                    "뉴스 보도날짜(YYYYMMDD)": ymd,
+                    "기사제목": title,
+                    "언론사": press,
+                    "기사 URL": url,
+                    "회사명": company,
+                    "고유번호": corp_id,
+                    "종목코드": ticker,
                 })
+
         df = pd.DataFrame(rows)
 
-        # (2) 기존 파일 열어서 시트 교체
+        # 2) 파일에 시트 교체 저장
+        target = Path(file_path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+
+        # 열 순서 보장
+        desired_order = [
+            "esg", "Theme (주제)", "Key Issue (핵심 이슈)", "뉴스 키워드 후보",
+            "부정 ESG 키워드", "부정점수", "뉴스 보도날짜(YYYYMMDD)",
+            "기사제목", "언론사", "기사 URL", "회사명", "고유번호", "종목코드",
+        ]
+        # 누락 컬럼 대비
+        for col in desired_order:
+            if col not in df.columns:
+                df[col] = -1 if col not in ("부정점수",) else 0
+        df = df[desired_order]
+
         try:
-            book = load_workbook(file_path)
+            # 기존 파일 존재 → 교체
+            book = load_workbook(str(target))
             if sheet_name in book.sheetnames and replace:
-                std = book[sheet_name]
-                book.remove(std)
-            with pd.ExcelWriter(file_path, engine="openpyxl", mode="a" if sheet_name not in book.sheetnames else "a") as writer:
+                ws = book[sheet_name]
+                book.remove(ws)
+            # openpyxl의 append 모드
+            with pd.ExcelWriter(str(target), engine="openpyxl", mode="a") as writer:
                 writer.book = book
                 df.to_excel(writer, index=False, sheet_name=sheet_name)
+                ws = writer.book[sheet_name]
+                # 헤더 스타일/자동폭
+                ExcelOutputHandler._apply_summary_style(ws)
                 writer.save()
         except FileNotFoundError:
-            # 파일이 없으면 새로 생성
-            with pd.ExcelWriter(file_path, engine="openpyxl") as writer:
+            # 파일 없으면 새로 생성
+            with pd.ExcelWriter(str(target), engine="openpyxl") as writer:
                 df.to_excel(writer, index=False, sheet_name=sheet_name)
+                ws = writer.book[sheet_name]
+                ExcelOutputHandler._apply_summary_style(ws)
+                writer.save()
+
 
     @staticmethod
     def _autosize_columns(ws, max_width: int = 50):
