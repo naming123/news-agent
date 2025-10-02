@@ -38,13 +38,8 @@ python main.py compare-sentences \
 
 # 2. sentence-transformers
 ```
-python main.py compare-sentences --query "부정" --input articles.xlsx -e result.xlsx
-
-python main.py compare-sentences \
-  -q "부정" \
-  -m multilingual \
-  --input sentences_kr.xlsx \
-  -e result.xlsx
+user@DESKTOP-JM15LC3 MINGW64 ~/yalco-Docker/data_project/PosNeg (main)
+$ python main.py compare-sentences --query "부정" --input ./input/articles.xlsx -e result.xlsx
 ```
 
 # 3. 영한 혼용

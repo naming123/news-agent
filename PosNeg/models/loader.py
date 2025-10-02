@@ -22,10 +22,9 @@ class ModelLoader:
         self.is_sentence_model = False  # ← 추가
     
     def load(self, model_name: str):
-        """모델 로드 - 영어 or 한국어"""
+        """모델 로드 - 타입 자동 감지"""
         
-
-        # Sentence Transformer 모델인지 확인
+        # ⭐ Sentence Transformer 먼저 체크! (순서 중요)
         if model_name == 'multilingual' or model_name.startswith('paraphrase'):
             if not SENTENCE_TRANSFORMERS_AVAILABLE:
                 raise ImportError(
@@ -34,16 +33,19 @@ class ModelLoader:
                 )
             self._load_sentence_transformer(model_name)
             self.is_sentence_model = True
-
-
-
-        # 한국어 모델인지 확인
-        if model_name in self.config.KOREAN_MODELS:
+            
+        # 한국어 FastText
+        elif model_name in self.config.KOREAN_MODELS:
             self._load_korean_model(model_name)
+            
+        # 영어 Gensim 모델
         elif model_name in self.config.MODELS:
             self._load_english_model(model_name)
+            
         else:
             raise ValueError(f"지원하지 않는 모델: {model_name}")
+
+
     def _load_sentence_transformer(self, model_name: str):
         """Sentence Transformer 로드 (한국어 지원!)"""
         
@@ -165,7 +167,7 @@ class ModelLoader:
         
         print(f"  ✓ {len(words):,}개 단어 로드 완료")
 
-        
+
     def encode_text(self, text: str) -> np.ndarray:
         """텍스트를 벡터로 변환 (단어 or 문장)"""
         if self.is_sentence_model:
