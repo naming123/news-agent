@@ -63,6 +63,8 @@ class ModelLoader:
         print("※ 한국어, 영어 등 50+ 언어 지원")
         
         self.model = SentenceTransformer(actual_model)
+        ###### CPU 강제
+        self.model = SentenceTransformer(actual_model, device='cpu')
         
         # 더미 어휘 생성 (문장 모델은 어휘 개념이 없음)
         self.token2id = {}
