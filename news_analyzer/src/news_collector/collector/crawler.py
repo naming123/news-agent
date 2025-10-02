@@ -93,36 +93,59 @@ class NaverNewsCrawler:
         
         max_retries = 5
         retry_count = 0
-        
+        base_backoff = 1.0
+        last_status = None
+        last_error = None
+
         while retry_count < max_retries:
             try:
                 resp = self.session.get(self.BASE_URL, headers=self.headers, params=params, timeout=self.timeout)
+                last_status = resp.status_code
                 print(f"[HTTP] status={resp.status_code} params={params}")
+
                 if resp.status_code == 200:
-                    j=resp.json()
+                    j = resp.json()
                     print(f"[HTTP] total={j.get('total')} items={len(j.get('items') or [])}")
-                    return resp.json()
-                    
-                elif resp.status_code == 429:
-                    # Rate limit - exponential backoff
-                    wait_time = (2 ** retry_count) + random.uniform(0, 1)
+                    return j
+
+                # --- 재시도 케이스 ---
+                if resp.status_code == 429:
+                    # Rate limit: exponential backoff + jitter
+                    wait_time = min(60.0, (base_backoff * (2 ** retry_count)) + random.uniform(0, 1))
                     print(f"[429 Rate Limit] {retry_count+1}/{max_retries} 재시도, {wait_time:.1f}초 대기...")
                     time.sleep(wait_time)
                     retry_count += 1
                     continue
-                    
-                else:
-                    print(f"[API 실패] status={resp.status_code}")
-                    break
+
+                if 500 <= resp.status_code < 600:
+                    # 서버 오류도 재시도 가치 있음
+                    wait_time = min(60.0, (base_backoff * (2 ** retry_count)) + random.uniform(0, 1))
+                    print(f"[5xx 서버 오류] {resp.status_code} → {retry_count+1}/{max_retries} 재시도, {wait_time:.1f}초 대기...")
+                    time.sleep(wait_time)
+                    retry_count += 1
+                    continue
+
+                # --- 즉시 종료 케이스 ---
+                if resp.status_code in (401, 403):
+                    print(f"[인증/권한 오류] status={resp.status_code} → 키/권한 확인 필요. 재시도 안 함.")
                     return None
-                    
-            except requests.exceptions.RequestException as e:
-                print(f"[API 예외] {e}")
-                break
+
+                if 400 <= resp.status_code < 500:
+                    print(f"[클라이언트 오류] status={resp.status_code} → 쿼리/파라미터 점검 필요. 재시도 안 함.")
+                    return None
+
+                # 기타 예상치 못한 상태코드
+                print(f"[API 실패] status={resp.status_code}")
                 return None
-                
-        print(f"[API 포기] {max_retries}회 재시도 실패")
-        
+
+            except requests.exceptions.RequestException as e:
+                last_error = e
+                wait_time = min(30.0, (base_backoff * (2 ** retry_count)) + random.uniform(0, 1))
+                print(f"[API 예외] {e} → {retry_count+1}/{max_retries} 재시도, {wait_time:.1f}초 대기...")
+                time.sleep(wait_time)
+                retry_count += 1
+
+        print(f"[종료] 재시도 소진. last_status={last_status}, last_error={last_error}")
         return None
 
     # ---------------------------
