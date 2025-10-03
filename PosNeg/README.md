@@ -36,7 +36,7 @@ python main.py compare-sentences \
   -e result.xlsx
 ```
 
-# 2. sentence-transformers
+# ★ 2. sentence-transformers
 ```
 user@DESKTOP-JM15LC3 MINGW64 ~/yalco-Docker/data_project/PosNeg (main)
 $ python main.py compare-sentences --query "부정" --input ./input/articles.xlsx -e result.xlsx

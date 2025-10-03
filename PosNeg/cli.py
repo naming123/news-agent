@@ -4,11 +4,25 @@ CLI 명령어 인터페이스
 """
 
 import click
+import time
+import logging
+from tqdm import tqdm
 from config.settings import Config
 from models.loader import ModelLoader
 from metrics.implementations import MetricFactory
 from analyzers.analyzer import WordSimilarityAnalyzer
 from utils.exporter import ResultExporter
+
+# 로깅 설정
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('analysis.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 
 @click.group()
@@ -23,11 +37,9 @@ def cli():
 
 @cli.command()
 @click.option('--model', '-m', default='multilingual',
-              type=click.Choice(list(Config.MODELS.keys())),
-              help='모델 선택')
+              type=click.Choice(list(Config.MODELS.keys())))
 @click.option('--metric', default='cosine',
-              type=click.Choice(Config.METRICS),
-              help='유사도 지표')
+              type=click.Choice(Config.METRICS))
 @click.option('--query', '-q', multiple=True, help='검색 단어')
 @click.option('--input', '-i', default=None, help='엑셀/CSV 파일')
 @click.option('--column', default=None, help='읽을 컬럼명')
@@ -36,6 +48,9 @@ def cli():
 @click.option('--format', '-f', type=click.Choice(['xlsx', 'csv']), default='xlsx')
 def search(model, metric, query, input, column, top_k, export, format):
     """단어 유사도 검색"""
+    
+    start_time = time.time()
+    logger.info(f"검색 시작 - 모델: {model}, 지표: {metric}")
     
     # 입력 방식 결정
     if input:
@@ -72,12 +87,13 @@ def search(model, metric, query, input, column, top_k, export, format):
     
     # 검색 실행
     results = []
-    for q in queries:
+    for q in tqdm(queries, desc="검색 중", unit="단어"):
         try:
             result = analyzer.search(q, metric_obj, top_k)
             result.display()
             results.append(result)
         except KeyError as e:
+            logger.error(f"{q}: {e}")
             print(f"\n[오류] {q}: {e}")
     
     # 엑셀/CSV 출력
@@ -87,6 +103,10 @@ def search(model, metric, query, input, column, top_k, export, format):
             exporter.export_to_excel(results, export)
         else:
             exporter.export_to_csv(results, export)
+    
+    elapsed = time.time() - start_time
+    logger.info(f"검색 완료 - 소요시간: {elapsed:.2f}초")
+    print(f"\n✓ 처리 완료! 소요 시간: {elapsed:.2f}초\n")
 
 
 # =============================================================================
@@ -95,11 +115,9 @@ def search(model, metric, query, input, column, top_k, export, format):
 
 @cli.command()
 @click.option('--model', '-m', default='multilingual',
-              type=click.Choice(list(Config.MODELS.keys())),
-              help='모델 선택')
+              type=click.Choice(list(Config.MODELS.keys())))
 @click.option('--metric', default='cosine',
-              type=click.Choice(Config.METRICS),
-              help='유사도 지표')
+              type=click.Choice(Config.METRICS))
 @click.option('--query', '-q', required=True, help='기준 단어')
 @click.option('--input', '-i', required=True, help='문장 엑셀 파일')
 @click.option('--column', default=None, help='문장 컬럼명')
@@ -108,6 +126,9 @@ def compare_sentences(model, metric, query, input, column, export):
     """단어와 문장들 비교"""
     
     from utils.importer import WordImporter
+    
+    start_time = time.time()
+    logger.info(f"문장 비교 시작 - 쿼리: {query}, 모델: {model}")
     
     print(f"\n{'='*60}")
     print(f"단어-문장 유사도 분석")
@@ -120,6 +141,7 @@ def compare_sentences(model, metric, query, input, column, export):
     
     # 문장 로드
     sentences = WordImporter.load_sentences_from_excel(input, column)
+    logger.info(f"{len(sentences)}개 문장 로드 완료")
     
     print(f"\n기준 단어: '{query}'")
     print(f"비교 문장 수: {len(sentences)}")
@@ -127,13 +149,23 @@ def compare_sentences(model, metric, query, input, column, export):
     
     # Sentence Transformer 사용
     if hasattr(loader, 'is_sentence_model') and loader.is_sentence_model:
+        print("벡터 변환 중...")
         query_vec = loader.encode_text(query)
-        sentence_vecs = [loader.encode_text(sent) for sent in sentences]
+        
+        sentence_vecs = []
+        for sent in tqdm(sentences, desc="문장 처리", unit="문장"):
+            sentence_vecs.append(loader.encode_text(sent))
         
         from sklearn.metrics.pairwise import cosine_similarity
         
         results = []
-        for idx, (sent, sent_vec) in enumerate(zip(sentences, sentence_vecs), 1):
+        print("\n유사도 계산 중...")
+        for idx, (sent, sent_vec) in enumerate(tqdm(
+            zip(sentences, sentence_vecs),
+            total=len(sentences),
+            desc="유사도 계산",
+            unit="문장"
+        ), 1):
             similarity = cosine_similarity(
                 query_vec.reshape(1, -1),
                 sent_vec.reshape(1, -1)
@@ -155,15 +187,16 @@ def compare_sentences(model, metric, query, input, column, export):
                 query, sentences, metric_obj
             )
         except KeyError as e:
+            logger.error(f"오류 발생: {e}")
             print(f"\n❌ 오류: {e}")
             return
     
     # 콘솔 출력
-    print(f"{'='*70}")
+    print(f"\n{'='*70}")
     print(f"결과: '{query}'와 문장 유사도")
     print(f"{'='*70}")
     
-    for rank, (idx, sentence, score, words) in enumerate(results, 1):
+    for rank, (idx, sentence, score, words) in enumerate(results[:10], 1):
         preview = sentence[:50] + "..." if len(sentence) > 50 else sentence
         bar_len = int(score * 40) if score > 0 else 0
         bar = '█' * bar_len
@@ -176,6 +209,12 @@ def compare_sentences(model, metric, query, input, column, export):
     # 엑셀 출력
     if export:
         _export_sentence_results(query, model, metric, results, export)
+    
+    elapsed = time.time() - start_time
+    logger.info(f"문장 비교 완료 - 소요시간: {elapsed:.2f}초")
+    print(f"\n{'='*70}")
+    print(f"✓ 처리 완료! 소요 시간: {elapsed:.2f}초")
+    print(f"{'='*70}\n")
 
 
 # =============================================================================
@@ -187,13 +226,15 @@ def compare_sentences(model, metric, query, input, column, export):
               type=click.Choice(list(Config.MODELS.keys())))
 @click.option('--metric', default='cosine',
               type=click.Choice(Config.METRICS))
-@click.option('--a', required=True, help='단어 A')
-@click.option('--b', required=True, help='단어 B')
-@click.option('--c', required=True, help='단어 C')
+@click.option('--a', required=True)
+@click.option('--b', required=True)
+@click.option('--c', required=True)
 @click.option('--top-k', '-k', default=5)
 @click.option('--export', '-e', default=None)
 def analogy(model, metric, a, b, c, top_k, export):
     """단어 유추: A - B + C = ?"""
+    
+    logger.info(f"단어 유추: {a} - {b} + {c}")
     
     config = Config()
     loader = ModelLoader(config)
@@ -212,7 +253,7 @@ def analogy(model, metric, a, b, c, top_k, export):
 
 
 # =============================================================================
-# 4. list-models - 모델 목록
+# 4. list-models
 # =============================================================================
 
 @cli.command()
@@ -226,7 +267,7 @@ def list_models():
 
 
 # =============================================================================
-# 5. list-metrics - 지표 목록
+# 5. list-metrics
 # =============================================================================
 
 @cli.command()
@@ -266,6 +307,7 @@ def _export_sentence_results(query, model, metric, results, filename):
     df = pd.DataFrame(data)
     df.to_excel(filepath, index=False, sheet_name='Results')
     
+    logger.info(f"엑셀 저장: {filepath}")
     print(f"\n✓ 엑셀 파일 저장: {filepath}")
 
 

@@ -1,0 +1,14 @@
+2025-10-03 01:52:43,523 - INFO - 문장 비교 시작 - 쿼리: 부정, 모델: multilingual
+2025-10-03 01:52:43,527 - INFO - Use pytorch device_name: cpu
+2025-10-03 01:52:43,528 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 01:52:46,714 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 01:52:57,520 - INFO - 306379개 문장 로드 완료
+2025-10-03 11:21:25,967 - INFO - 문장 비교 시작 - 쿼리: 부정, 모델: multilingual
+2025-10-03 11:21:25,968 - INFO - Use pytorch device_name: cpu
+2025-10-03 11:21:25,969 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 11:21:29,312 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 11:21:39,865 - INFO - 306379개 문장 로드 완료
+2025-10-03 11:22:01,362 - INFO - 문장 비교 시작 - 쿼리: 부정, 모델: multilingual
+2025-10-03 11:22:01,363 - INFO - Use pytorch device_name: cpu
+2025-10-03 11:22:01,364 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 11:22:04,554 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2

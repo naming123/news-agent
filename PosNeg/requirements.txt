@@ -24,3 +24,4 @@ requests>=2.25.0
 
 # 기타
 scikit-learn>=1.0.0
+tqdm>=4.60.0
