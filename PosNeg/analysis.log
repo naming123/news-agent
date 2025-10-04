@@ -12,3 +12,10 @@
 2025-10-03 11:22:01,363 - INFO - Use pytorch device_name: cpu
 2025-10-03 11:22:01,364 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
 2025-10-03 11:22:04,554 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 11:35:12,275 - INFO - 문장 비교 시작 - 쿼리: 부정, 모델: multilingual
+2025-10-03 11:35:12,305 - INFO - Use pytorch device_name: cuda:0
+2025-10-03 11:35:12,306 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 11:35:16,319 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-03 11:35:26,736 - INFO - 306379개 문장 로드 완료
+2025-10-03 13:14:23,694 - INFO - 엑셀 저장: results\result.xlsx
+2025-10-03 13:14:23,709 - INFO - 문장 비교 완료 - 소요시간: 5951.43초

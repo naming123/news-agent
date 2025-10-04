@@ -50,11 +50,8 @@ python -m news_collector.search \
 input/NEWS.xlsx의 queries 시트에서 키워드 목록을 읽어 일괄 수집합니다.
 
 ```
-python -m news_collector.ioHandle.batch_crawler \
-  --input input/NEWS.xlsx \
-  --sheet queries \
-  --output-sheet output \
-  --inplace
+python -m src.news_collector.ioHandle.batch_crawler     --inp
+ut ./input/NEWS.xlsx     --output-sheet output     --inplace 
 ```
 
   1. --inplace: 같은 파일 내 output 시트에 결과를 작성

@@ -1,3 +1,4 @@
+```
 word2vec_similarity/
 ├── config/
 │   ├── __init__.py
@@ -20,7 +21,7 @@ word2vec_similarity/
 ├── main.py                  # 메인 + 한 줄 실행 함수
 ├── results/                 # 출력 폴더 (자동 생성)
 └── requirements.txt
-
+```
 
 
 
@@ -38,7 +39,7 @@ python main.py compare-sentences \
 
 # ★ 2. sentence-transformers
 ```
-user@DESKTOP-JM15LC3 MINGW64 ~/yalco-Docker/data_project/PosNeg (main)
+user@DESKTOP-JM15LC3 MINGW64 ~/yalco-Docker/data_project/PosNeg (main)it/s가 몇 초?
 $ python main.py compare-sentences --query "부정" --input ./input/articles.xlsx -e result.xlsx
 ```
 
