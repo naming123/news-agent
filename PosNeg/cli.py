@@ -310,6 +310,68 @@ def _export_sentence_results(query, model, metric, results, filename):
     logger.info(f"엑셀 저장: {filepath}")
     print(f"\n✓ 엑셀 파일 저장: {filepath}")
 
+import os
+import re
+import pandas as pd
+from pandas import ExcelWriter
+
+def _sanitize_sheet_name(name: str) -> str:
+    # Excel sheet name: max 31 chars, no []:*?/\
+    name = re.sub(r'[\[\]\:\*\?\/\\]', '_', str(name))
+    return name[:31] if len(name) > 31 else name
+
+def _unique_sheet_name(writer: ExcelWriter, base: str) -> str:
+    base = _sanitize_sheet_name(base) or "Sheet"
+    existing = set(writer.book.sheetnames) if hasattr(writer, "book") else set()
+    if base not in existing:
+        return base
+    i = 2
+    while True:
+        candidate = _sanitize_sheet_name(f"{base}_{i}")[:31]
+        if candidate not in existing:
+            return candidate
+        i += 1
+
+def _export_sentence_results(query: str, model: str, metric: str, results, export: str):
+    """
+    results: iterable of dict-like rows, e.g. [{'rank':1,'text':'...', 'score':0.71}, ...]
+    export : path to excel file (one file, many sheets)
+    """
+    df = pd.DataFrame(results)
+    df.index += 1  # 보기 좋게 1-base
+    df.insert(0, "query", query)
+    df.insert(1, "model", model)
+    df.insert(2, "metric", metric)
+
+    # 파일 유무에 따라 모드/옵션 분기
+    file_exists = os.path.exists(export)
+    mode = "a" if file_exists else "w"
+
+    # openpyxl 엔진 강제 (xlsx)
+    writer_kwargs = dict(engine="openpyxl", mode=mode)
+
+    # append 모드에서만 사용할 수 있는 옵션
+    if file_exists:
+        writer_kwargs["if_sheet_exists"] = "replace"
+
+    # 시트명은 쿼리로, 길고 특수문자 많으면 정리
+    base_sheet = _sanitize_sheet_name(query) or "result"
+    try:
+        with pd.ExcelWriter(export, **writer_kwargs) as writer:
+            # append 모드에서는 기존 시트 목록을 보고 고유 시트명 보장
+            sheet_name = (
+                _unique_sheet_name(writer, base_sheet)
+                if file_exists else base_sheet
+            )
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+    except PermissionError:
+        # 엑셀이 열려 있는 경우 흔한 이슈
+        raise SystemExit(
+            f"엑셀 파일이 열려 있습니다: {export}\n파일을 닫고 다시 실행하세요."
+        )
+
+
+
 
 if __name__ == '__main__':
     cli()
