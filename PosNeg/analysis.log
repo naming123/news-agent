@@ -1,0 +1,901 @@
+2025-10-05 00:26:42,160 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 00:26:42,230 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 00:26:42,230 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:26:46,520 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:32:29,449 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 00:32:29,471 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 00:32:29,471 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:32:33,057 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:34:17,962 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 00:34:17,990 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 00:34:17,990 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:34:21,636 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:34:32,384 - INFO - 306379개 문장 로드 완료
+2025-10-05 00:45:07,362 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 00:45:07,391 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 00:45:07,391 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:45:11,220 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:45:21,853 - INFO - 306379개 문장 로드 완료
+2025-10-05 00:45:57,623 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 00:45:57,646 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 00:45:57,647 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:46:01,413 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 00:46:12,616 - INFO - 306379개 문장 로드 완료
+2025-10-05 08:22:31,173 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 08:22:31,195 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:22:31,195 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:22:34,800 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:22:38,922 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:22:59,529 - INFO - 엑셀 저장: results\results
+2025-10-05 08:22:59,529 - INFO - 문장 비교 완료 - 소요시간: 28.36초
+2025-10-05 08:23:05,269 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 문제, 모델: multilingual
+2025-10-05 08:23:05,292 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:23:05,292 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:23:08,888 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:23:12,669 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:23:32,342 - INFO - 엑셀 저장: results\results
+2025-10-05 08:23:32,342 - INFO - 문장 비교 완료 - 소요시간: 27.07초
+2025-10-05 08:23:37,944 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 부정적, 모델: multilingual
+2025-10-05 08:23:37,975 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:23:37,975 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:23:41,517 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:23:45,244 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:24:05,441 - INFO - 엑셀 저장: results\results
+2025-10-05 08:24:05,441 - INFO - 문장 비교 완료 - 소요시간: 27.50초
+2025-10-05 08:24:11,062 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 악화, 모델: multilingual
+2025-10-05 08:24:11,082 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:24:11,082 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:24:14,682 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:24:18,353 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:24:38,173 - INFO - 엑셀 저장: results\results
+2025-10-05 08:24:38,173 - INFO - 문장 비교 완료 - 소요시간: 27.11초
+2025-10-05 08:24:43,717 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 위기, 모델: multilingual
+2025-10-05 08:24:43,740 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:24:43,740 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:24:47,344 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:24:51,018 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:25:10,928 - INFO - 엑셀 저장: results\results
+2025-10-05 08:25:10,928 - INFO - 문장 비교 완료 - 소요시간: 27.21초
+2025-10-05 08:25:16,486 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 논란, 모델: multilingual
+2025-10-05 08:25:16,510 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:25:16,511 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:25:20,121 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:25:23,743 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:25:43,354 - INFO - 엑셀 저장: results\results
+2025-10-05 08:25:43,354 - INFO - 문장 비교 완료 - 소요시간: 26.87초
+2025-10-05 08:25:48,989 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 문제, 모델: multilingual
+2025-10-05 08:25:49,016 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:25:49,017 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:25:52,560 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:25:56,215 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:26:16,195 - INFO - 엑셀 저장: results\results
+2025-10-05 08:26:16,195 - INFO - 문장 비교 완료 - 소요시간: 27.21초
+2025-10-05 08:26:21,801 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 부정적, 모델: multilingual
+2025-10-05 08:26:21,825 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:26:21,825 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:26:25,792 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:26:29,498 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:26:50,146 - INFO - 엑셀 저장: results\results
+2025-10-05 08:26:50,146 - INFO - 문장 비교 완료 - 소요시간: 28.34초
+2025-10-05 08:26:55,805 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 악화, 모델: multilingual
+2025-10-05 08:26:55,834 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:26:55,834 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:26:59,792 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:27:03,529 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:27:24,103 - INFO - 엑셀 저장: results\results
+2025-10-05 08:27:24,103 - INFO - 문장 비교 완료 - 소요시간: 28.30초
+2025-10-05 08:27:29,856 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 위기, 모델: multilingual
+2025-10-05 08:27:29,882 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:27:29,883 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:27:33,447 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:27:37,181 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:27:57,884 - INFO - 엑셀 저장: results\results
+2025-10-05 08:27:57,884 - INFO - 문장 비교 완료 - 소요시간: 28.03초
+2025-10-05 08:28:03,592 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 논란, 모델: multilingual
+2025-10-05 08:28:03,612 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:28:03,612 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:28:07,132 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:28:11,194 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:28:31,819 - INFO - 엑셀 저장: results\results
+2025-10-05 08:28:31,819 - INFO - 문장 비교 완료 - 소요시간: 28.23초
+2025-10-05 08:28:37,485 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 문제, 모델: multilingual
+2025-10-05 08:28:37,511 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:28:37,511 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:28:42,222 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:28:45,913 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:29:06,459 - INFO - 엑셀 저장: results\results
+2025-10-05 08:29:06,466 - INFO - 문장 비교 완료 - 소요시간: 28.98초
+2025-10-05 08:29:12,119 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 부정적, 모델: multilingual
+2025-10-05 08:29:12,148 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:29:12,148 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:29:15,761 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:29:19,435 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:29:40,060 - INFO - 엑셀 저장: results\results
+2025-10-05 08:29:40,060 - INFO - 문장 비교 완료 - 소요시간: 27.94초
+2025-10-05 08:29:45,727 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 악화, 모델: multilingual
+2025-10-05 08:29:45,751 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:29:45,751 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:29:49,292 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:29:52,988 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:30:13,522 - INFO - 엑셀 저장: results\results
+2025-10-05 08:30:13,522 - INFO - 문장 비교 완료 - 소요시간: 27.80초
+2025-10-05 08:30:19,216 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 위기, 모델: multilingual
+2025-10-05 08:30:19,237 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:30:19,237 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:30:22,765 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:30:26,792 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:30:47,504 - INFO - 엑셀 저장: results\results
+2025-10-05 08:30:47,504 - INFO - 문장 비교 완료 - 소요시간: 28.29초
+2025-10-05 08:30:53,204 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 논란, 모델: multilingual
+2025-10-05 08:30:53,239 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:30:53,239 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:30:56,780 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:31:00,455 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:31:21,189 - INFO - 엑셀 저장: results\results
+2025-10-05 08:31:21,189 - INFO - 문장 비교 완료 - 소요시간: 27.99초
+2025-10-05 08:31:26,855 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 문제, 모델: multilingual
+2025-10-05 08:31:26,875 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:31:26,875 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:31:30,535 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:31:34,248 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:31:54,922 - INFO - 엑셀 저장: results\results
+2025-10-05 08:31:54,922 - INFO - 문장 비교 완료 - 소요시간: 28.07초
+2025-10-05 08:32:00,587 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 부정적, 모델: multilingual
+2025-10-05 08:32:00,613 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:32:00,613 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:32:04,167 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:32:07,840 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:32:28,521 - INFO - 엑셀 저장: results\results
+2025-10-05 08:32:28,521 - INFO - 문장 비교 완료 - 소요시간: 27.93초
+2025-10-05 08:32:34,339 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 악화, 모델: multilingual
+2025-10-05 08:32:34,363 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:32:34,363 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:32:37,955 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:32:41,618 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:33:02,316 - INFO - 엑셀 저장: results\results
+2025-10-05 08:33:02,316 - INFO - 문장 비교 완료 - 소요시간: 27.98초
+2025-10-05 08:33:08,057 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 위기, 모델: multilingual
+2025-10-05 08:33:08,089 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:33:08,089 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:33:11,663 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:33:15,346 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:33:36,138 - INFO - 엑셀 저장: results\results
+2025-10-05 08:33:36,138 - INFO - 문장 비교 완료 - 소요시간: 28.08초
+2025-10-05 08:33:41,782 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 논란, 모델: multilingual
+2025-10-05 08:33:41,809 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:33:41,809 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:33:46,114 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:33:49,832 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:34:10,342 - INFO - 엑셀 저장: results\results
+2025-10-05 08:34:10,342 - INFO - 문장 비교 완료 - 소요시간: 28.56초
+2025-10-05 08:34:16,058 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 문제, 모델: multilingual
+2025-10-05 08:34:16,075 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:34:16,075 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:34:20,085 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:34:23,793 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:34:44,502 - INFO - 엑셀 저장: results\results
+2025-10-05 08:34:44,502 - INFO - 문장 비교 완료 - 소요시간: 28.44초
+2025-10-05 08:34:50,198 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 부정적, 모델: multilingual
+2025-10-05 08:34:50,214 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:34:50,214 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:34:53,812 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:34:57,842 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:35:18,328 - INFO - 엑셀 저장: results\results
+2025-10-05 08:35:18,328 - INFO - 문장 비교 완료 - 소요시간: 28.13초
+2025-10-05 08:35:24,007 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 악화, 모델: multilingual
+2025-10-05 08:35:24,026 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:35:24,026 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:35:27,595 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:35:31,433 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:35:51,510 - INFO - 엑셀 저장: results\results
+2025-10-05 08:35:51,510 - INFO - 문장 비교 완료 - 소요시간: 27.50초
+2025-10-05 08:35:57,160 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 위기, 모델: multilingual
+2025-10-05 08:35:57,181 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:35:57,181 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:36:00,740 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:36:04,371 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:36:24,973 - INFO - 엑셀 저장: results\results
+2025-10-05 08:36:24,978 - INFO - 문장 비교 완료 - 소요시간: 27.82초
+2025-10-05 08:36:30,716 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 논란, 모델: multilingual
+2025-10-05 08:36:30,747 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:36:30,747 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:36:34,291 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:36:38,012 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:36:58,574 - INFO - 엑셀 저장: results\results
+2025-10-05 08:36:58,574 - INFO - 문장 비교 완료 - 소요시간: 27.86초
+2025-10-05 08:37:04,198 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 문제, 모델: multilingual
+2025-10-05 08:37:04,229 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:37:04,229 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:37:07,780 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:37:11,481 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:37:32,087 - INFO - 엑셀 저장: results\results
+2025-10-05 08:37:32,087 - INFO - 문장 비교 완료 - 소요시간: 27.89초
+2025-10-05 08:37:37,944 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 부정적, 모델: multilingual
+2025-10-05 08:37:37,975 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:37:37,975 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:37:41,530 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:37:45,217 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:38:05,597 - INFO - 엑셀 저장: results\results
+2025-10-05 08:38:05,597 - INFO - 문장 비교 완료 - 소요시간: 27.65초
+2025-10-05 08:38:11,323 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 악화, 모델: multilingual
+2025-10-05 08:38:11,360 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:38:11,360 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:38:14,922 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:38:18,591 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:38:38,957 - INFO - 엑셀 저장: results\results
+2025-10-05 08:38:38,957 - INFO - 문장 비교 완료 - 소요시간: 27.63초
+2025-10-05 08:38:44,692 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 위기, 모델: multilingual
+2025-10-05 08:38:44,722 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:38:44,722 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:38:48,347 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:38:52,395 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:39:12,927 - INFO - 엑셀 저장: results\results
+2025-10-05 08:39:12,927 - INFO - 문장 비교 완료 - 소요시간: 28.23초
+2025-10-05 08:39:18,595 - INFO - 문장 비교 시작 - 쿼리: 파업 논란, 모델: multilingual
+2025-10-05 08:39:18,620 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:39:18,620 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:39:22,581 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:39:26,283 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:39:47,045 - INFO - 엑셀 저장: results\results
+2025-10-05 08:39:47,045 - INFO - 문장 비교 완료 - 소요시간: 28.45초
+2025-10-05 08:39:52,803 - INFO - 문장 비교 시작 - 쿼리: 파업 문제, 모델: multilingual
+2025-10-05 08:39:52,826 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:39:52,826 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:39:56,378 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:40:00,021 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:40:20,560 - INFO - 엑셀 저장: results\results
+2025-10-05 08:40:20,560 - INFO - 문장 비교 완료 - 소요시간: 27.76초
+2025-10-05 08:40:26,238 - INFO - 문장 비교 시작 - 쿼리: 파업 부정적, 모델: multilingual
+2025-10-05 08:40:26,260 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:40:26,260 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:40:29,886 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:40:33,912 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:40:54,620 - INFO - 엑셀 저장: results\results
+2025-10-05 08:40:54,620 - INFO - 문장 비교 완료 - 소요시간: 28.38초
+2025-10-05 08:41:00,246 - INFO - 문장 비교 시작 - 쿼리: 파업 악화, 모델: multilingual
+2025-10-05 08:41:00,271 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:41:00,271 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:41:03,799 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:41:07,455 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:41:27,912 - INFO - 엑셀 저장: results\results
+2025-10-05 08:41:27,912 - INFO - 문장 비교 완료 - 소요시간: 27.67초
+2025-10-05 08:41:33,533 - INFO - 문장 비교 시작 - 쿼리: 파업 위기, 모델: multilingual
+2025-10-05 08:41:33,562 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:41:33,562 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:41:37,140 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:41:41,256 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:42:01,809 - INFO - 엑셀 저장: results\results
+2025-10-05 08:42:01,809 - INFO - 문장 비교 완료 - 소요시간: 28.28초
+2025-10-05 08:58:27,422 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 08:58:27,465 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:58:27,465 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:58:30,982 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:58:34,961 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:58:54,779 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 08:58:54,779 - INFO - 문장 비교 완료 - 소요시간: 27.36초
+2025-10-05 08:59:00,389 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 문제, 모델: multilingual
+2025-10-05 08:59:00,420 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:59:00,420 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:59:03,864 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:59:07,346 - INFO - 1709개 문장 로드 완료
+2025-10-05 08:59:27,383 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 08:59:27,383 - INFO - 문장 비교 완료 - 소요시간: 26.99초
+2025-10-05 08:59:32,965 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 부정적, 모델: multilingual
+2025-10-05 08:59:32,987 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 08:59:32,987 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:59:36,736 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 08:59:40,297 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:00:00,017 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:00:00,017 - INFO - 문장 비교 완료 - 소요시간: 27.05초
+2025-10-05 09:00:05,625 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 악화, 모델: multilingual
+2025-10-05 09:00:05,649 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:00:05,649 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:00:09,088 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:00:12,683 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:00:32,635 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:00:32,635 - INFO - 문장 비교 완료 - 소요시간: 27.01초
+2025-10-05 09:00:38,265 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 위기, 모델: multilingual
+2025-10-05 09:00:38,283 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:00:38,283 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:00:41,725 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:00:45,241 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:01:05,189 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:01:05,189 - INFO - 문장 비교 완료 - 소요시간: 26.92초
+2025-10-05 09:01:10,779 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 논란, 모델: multilingual
+2025-10-05 09:01:10,807 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:01:10,807 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:01:14,250 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:01:17,875 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:01:37,996 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:01:37,996 - INFO - 문장 비교 완료 - 소요시간: 27.22초
+2025-10-05 09:01:43,623 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 문제, 모델: multilingual
+2025-10-05 09:01:43,648 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:01:43,648 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:01:47,121 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:01:50,689 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:02:10,427 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:02:10,427 - INFO - 문장 비교 완료 - 소요시간: 26.80초
+2025-10-05 09:02:15,971 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 부정적, 모델: multilingual
+2025-10-05 09:02:15,996 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:02:15,996 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:02:19,364 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:02:22,892 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:02:43,517 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:02:43,517 - INFO - 문장 비교 완료 - 소요시간: 27.55초
+2025-10-05 09:02:49,211 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 악화, 모델: multilingual
+2025-10-05 09:02:49,234 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:02:49,234 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:02:53,044 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:02:56,583 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:03:17,457 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:03:17,457 - INFO - 문장 비교 완료 - 소요시간: 28.25초
+2025-10-05 09:03:23,419 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 위기, 모델: multilingual
+2025-10-05 09:03:23,439 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:03:23,439 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:03:26,952 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:03:30,892 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:03:51,117 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:03:51,117 - INFO - 문장 비교 완료 - 소요시간: 27.70초
+2025-10-05 09:03:56,808 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 논란, 모델: multilingual
+2025-10-05 09:03:56,824 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:03:56,824 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:04:00,231 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:04:03,775 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:04:24,589 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:04:24,589 - INFO - 문장 비교 완료 - 소요시간: 27.78초
+2025-10-05 09:04:30,307 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 문제, 모델: multilingual
+2025-10-05 09:04:30,333 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:04:30,333 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:04:33,859 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:04:37,521 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:04:58,147 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:04:58,147 - INFO - 문장 비교 완료 - 소요시간: 27.84초
+2025-10-05 09:05:03,818 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 부정적, 모델: multilingual
+2025-10-05 09:05:03,843 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:05:03,843 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:05:07,442 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:05:10,944 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:05:31,581 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:05:31,581 - INFO - 문장 비교 완료 - 소요시간: 27.76초
+2025-10-05 09:05:37,237 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 악화, 모델: multilingual
+2025-10-05 09:05:37,269 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:05:37,269 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:05:41,057 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:05:45,012 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:06:05,234 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:06:05,234 - INFO - 문장 비교 완료 - 소요시간: 28.00초
+2025-10-05 09:06:10,927 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 위기, 모델: multilingual
+2025-10-05 09:06:10,953 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:06:10,953 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:06:14,687 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:06:18,211 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:06:39,047 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:06:39,047 - INFO - 문장 비교 완료 - 소요시간: 28.12초
+2025-10-05 09:06:44,699 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 논란, 모델: multilingual
+2025-10-05 09:06:44,715 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:06:44,715 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:06:48,200 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:06:51,780 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:07:12,494 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:07:12,494 - INFO - 문장 비교 완료 - 소요시간: 27.80초
+2025-10-05 09:07:18,131 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 문제, 모델: multilingual
+2025-10-05 09:07:18,151 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:07:18,151 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:07:21,612 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:07:25,190 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:07:45,786 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:07:45,786 - INFO - 문장 비교 완료 - 소요시간: 27.66초
+2025-10-05 09:07:51,446 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 부정적, 모델: multilingual
+2025-10-05 09:07:51,467 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:07:51,467 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:07:54,934 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:07:58,507 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:08:19,082 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:08:19,082 - INFO - 문장 비교 완료 - 소요시간: 27.64초
+2025-10-05 09:08:24,898 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 악화, 모델: multilingual
+2025-10-05 09:08:24,926 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:08:24,926 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:08:28,346 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:08:31,865 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:08:52,682 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:08:52,682 - INFO - 문장 비교 완료 - 소요시간: 27.78초
+2025-10-05 09:08:58,318 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 위기, 모델: multilingual
+2025-10-05 09:08:58,341 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:08:58,342 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:09:01,790 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:09:05,310 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:09:25,950 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:09:25,950 - INFO - 문장 비교 완료 - 소요시간: 27.63초
+2025-10-05 09:09:31,576 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 논란, 모델: multilingual
+2025-10-05 09:09:31,605 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:09:31,605 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:09:35,050 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:09:38,579 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:09:59,171 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:09:59,171 - INFO - 문장 비교 완료 - 소요시간: 27.59초
+2025-10-05 09:10:04,766 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 문제, 모델: multilingual
+2025-10-05 09:10:04,785 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:10:04,785 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:10:08,229 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:10:11,824 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:10:32,247 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:10:32,247 - INFO - 문장 비교 완료 - 소요시간: 27.48초
+2025-10-05 09:10:37,860 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 부정적, 모델: multilingual
+2025-10-05 09:10:37,885 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:10:37,885 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:10:41,631 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:10:45,548 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:11:06,025 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:11:06,035 - INFO - 문장 비교 완료 - 소요시간: 28.17초
+2025-10-05 09:11:11,726 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 악화, 모델: multilingual
+2025-10-05 09:11:11,757 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:11:11,757 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:11:15,165 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:11:18,747 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:11:39,410 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:11:39,410 - INFO - 문장 비교 완료 - 소요시간: 27.68초
+2025-10-05 09:11:45,244 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 위기, 모델: multilingual
+2025-10-05 09:11:45,268 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:11:45,268 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:11:48,694 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:11:52,717 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:12:13,489 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:12:13,489 - INFO - 문장 비교 완료 - 소요시간: 28.25초
+2025-10-05 09:12:19,160 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 논란, 모델: multilingual
+2025-10-05 09:12:19,183 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:12:19,183 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:12:22,619 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:12:26,132 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:12:46,933 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:12:46,933 - INFO - 문장 비교 완료 - 소요시간: 27.77초
+2025-10-05 09:12:52,632 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 문제, 모델: multilingual
+2025-10-05 09:12:52,657 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:12:52,657 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:12:56,050 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:12:59,669 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:13:20,131 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:13:20,131 - INFO - 문장 비교 완료 - 소요시간: 27.50초
+2025-10-05 09:13:25,899 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 부정적, 모델: multilingual
+2025-10-05 09:13:25,923 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:13:25,923 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:13:29,436 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:13:33,352 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:13:54,042 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:13:54,042 - INFO - 문장 비교 완료 - 소요시간: 28.14초
+2025-10-05 09:13:59,773 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 악화, 모델: multilingual
+2025-10-05 09:13:59,797 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:13:59,797 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:14:03,176 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:14:06,711 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:14:27,513 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:14:27,513 - INFO - 문장 비교 완료 - 소요시간: 27.74초
+2025-10-05 09:14:33,147 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 위기, 모델: multilingual
+2025-10-05 09:14:33,167 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:14:33,167 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:14:36,657 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:14:40,203 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:15:00,929 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:15:00,929 - INFO - 문장 비교 완료 - 소요시간: 27.78초
+2025-10-05 09:15:06,532 - INFO - 문장 비교 시작 - 쿼리: 파업 논란, 모델: multilingual
+2025-10-05 09:15:06,552 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:15:06,552 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:15:10,197 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:15:13,773 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:15:34,243 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:15:34,243 - INFO - 문장 비교 완료 - 소요시간: 27.71초
+2025-10-05 09:15:39,865 - INFO - 문장 비교 시작 - 쿼리: 파업 문제, 모델: multilingual
+2025-10-05 09:15:39,883 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:15:39,883 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:15:43,444 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:15:47,020 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:16:07,796 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:16:07,796 - INFO - 문장 비교 완료 - 소요시간: 27.93초
+2025-10-05 09:16:13,445 - INFO - 문장 비교 시작 - 쿼리: 파업 부정적, 모델: multilingual
+2025-10-05 09:16:13,473 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:16:13,473 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:16:17,295 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:16:20,862 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:16:41,302 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:16:41,302 - INFO - 문장 비교 완료 - 소요시간: 27.86초
+2025-10-05 09:16:46,936 - INFO - 문장 비교 시작 - 쿼리: 파업 악화, 모델: multilingual
+2025-10-05 09:16:46,963 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:16:46,963 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:16:50,402 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:16:54,019 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:17:14,799 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:17:14,799 - INFO - 문장 비교 완료 - 소요시간: 27.86초
+2025-10-05 09:17:20,537 - INFO - 문장 비교 시작 - 쿼리: 파업 위기, 모델: multilingual
+2025-10-05 09:17:20,561 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:17:20,561 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:17:24,055 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:17:27,602 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:17:48,348 - INFO - 엑셀 저장: results\results.xlsx
+2025-10-05 09:17:48,348 - INFO - 문장 비교 완료 - 소요시간: 27.81초
+2025-10-05 09:58:43,812 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 09:58:43,834 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:58:43,834 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:58:47,344 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:58:51,110 - INFO - 1709개 문장 로드 완료
+2025-10-05 09:59:48,587 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 09:59:48,613 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 09:59:48,613 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:59:52,116 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 09:59:55,872 - INFO - 1709�� ���� �ε� �Ϸ�
+2025-10-05 10:00:23,495 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 10:00:23,520 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:00:23,520 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:00:27,414 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:00:31,079 - INFO - 1709�� ���� �ε� �Ϸ�
+2025-10-05 10:00:46,962 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 10:00:46,986 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:00:46,986 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:00:50,479 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:00:53,901 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 10:00:53,927 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:00:53,927 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:00:54,330 - INFO - 1709�� ���� �ε� �Ϸ�
+2025-10-05 10:00:58,385 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:01:02,513 - INFO - 1709�� ���� �ε� �Ϸ�
+2025-10-05 10:02:56,848 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 10:02:56,876 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:02:56,877 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:00,413 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:02,186 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 10:03:02,207 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:03:02,207 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:04,165 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:03:06,067 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:10,194 - INFO - 1709�� ���� �ε� �Ϸ�
+2025-10-05 10:03:10,387 - INFO - ���� �� ���� - ����: �뵿���� ����, ��: multilingual
+2025-10-05 10:03:10,414 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:03:10,414 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:14,425 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:18,855 - INFO - 1709�� ���� �ε� �Ϸ�
+2025-10-05 10:03:31,606 - INFO - 문장 비교 완료 - 소요시간: 34.76초
+2025-10-05 10:03:39,840 - INFO - ���� �� �Ϸ� - �ҿ�ð�: 37.65��
+2025-10-05 10:03:41,252 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 문제, 모델: multilingual
+2025-10-05 10:03:41,281 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:03:41,281 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:45,083 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:03:46,751 - INFO - ���� �� �Ϸ� - �ҿ�ð�: 36.36��
+2025-10-05 10:03:49,065 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:04:10,418 - INFO - 문장 비교 완료 - 소요시간: 29.17초
+2025-10-05 10:04:16,673 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 부정적, 모델: multilingual
+2025-10-05 10:04:16,702 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:04:16,702 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:04:20,239 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:04:23,920 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:04:46,082 - INFO - 문장 비교 완료 - 소요시간: 29.41초
+2025-10-05 10:04:51,921 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 악화, 모델: multilingual
+2025-10-05 10:04:51,945 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:04:51,945 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:04:55,745 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:04:59,286 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:05:44,047 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 논란, 모델: multilingual
+2025-10-05 10:05:44,066 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:05:44,066 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:05:47,917 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:05:51,482 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:06:12,001 - INFO - 문장 비교 완료 - 소요시간: 27.95초
+2025-10-05 10:06:18,030 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 문제, 모델: multilingual
+2025-10-05 10:06:18,055 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:06:18,055 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:06:21,495 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:06:25,073 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:06:45,834 - INFO - 문장 비교 완료 - 소요시간: 27.80초
+2025-10-05 10:06:51,589 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 부정적, 모델: multilingual
+2025-10-05 10:06:51,614 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:06:51,614 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:06:55,023 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:06:58,740 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:07:19,656 - INFO - 문장 비교 완료 - 소요시간: 28.07초
+2025-10-05 10:07:25,328 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 악화, 모델: multilingual
+2025-10-05 10:07:25,347 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:07:25,347 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:07:28,823 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:07:32,360 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:07:53,031 - INFO - 문장 비교 완료 - 소요시간: 27.70초
+2025-10-05 10:07:58,807 - INFO - 문장 비교 시작 - 쿼리: 노동갈등 위기, 모델: multilingual
+2025-10-05 10:07:58,834 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:07:58,834 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:08:02,240 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:08:05,836 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:08:26,450 - INFO - 문장 비교 완료 - 소요시간: 27.64초
+2025-10-05 10:08:32,139 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 논란, 모델: multilingual
+2025-10-05 10:08:32,163 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:08:32,163 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:08:35,634 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:08:39,153 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:09:00,152 - INFO - 문장 비교 완료 - 소요시간: 28.01초
+2025-10-05 10:09:05,871 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 문제, 모델: multilingual
+2025-10-05 10:09:05,894 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:09:05,894 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:09:09,674 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:09:13,213 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:09:34,469 - INFO - 문장 비교 완료 - 소요시간: 28.60초
+2025-10-05 10:09:40,165 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 부정적, 모델: multilingual
+2025-10-05 10:09:40,186 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:09:40,186 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:09:44,576 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:09:48,154 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:10:10,399 - INFO - 문장 비교 완료 - 소요시간: 30.23초
+2025-10-05 10:10:16,131 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 악화, 모델: multilingual
+2025-10-05 10:10:16,155 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:10:16,155 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:10:19,591 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:10:23,150 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:10:45,570 - INFO - 문장 비교 완료 - 소요시간: 29.44초
+2025-10-05 10:10:51,411 - INFO - 문장 비교 시작 - 쿼리: 노동자학대 위기, 모델: multilingual
+2025-10-05 10:10:51,431 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:10:51,431 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:10:54,901 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:10:58,549 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:11:21,320 - INFO - 문장 비교 완료 - 소요시간: 29.91초
+2025-10-05 10:11:27,200 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 논란, 모델: multilingual
+2025-10-05 10:11:27,223 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:11:27,223 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:11:30,627 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:11:34,152 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:11:57,245 - INFO - 문장 비교 완료 - 소요시간: 30.05초
+2025-10-05 10:12:03,025 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 문제, 모델: multilingual
+2025-10-05 10:12:03,050 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:12:03,050 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:12:06,476 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:12:10,131 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:12:33,470 - INFO - 문장 비교 완료 - 소요시간: 30.44초
+2025-10-05 10:12:39,262 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 부정적, 모델: multilingual
+2025-10-05 10:12:39,295 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:12:39,295 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:12:43,085 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:12:46,655 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:13:10,425 - INFO - 문장 비교 완료 - 소요시간: 31.16초
+2025-10-05 10:13:16,237 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 악화, 모델: multilingual
+2025-10-05 10:13:16,260 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:13:16,260 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:13:19,680 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:13:23,338 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:13:47,063 - INFO - 문장 비교 완료 - 소요시간: 30.83초
+2025-10-05 10:13:52,925 - INFO - 문장 비교 시작 - 쿼리: 노동쟁의 위기, 모델: multilingual
+2025-10-05 10:13:52,948 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:13:52,948 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:13:56,412 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:14:00,342 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:14:24,264 - INFO - 문장 비교 완료 - 소요시간: 31.34초
+2025-10-05 10:14:30,155 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 논란, 모델: multilingual
+2025-10-05 10:14:30,176 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:14:30,176 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:14:33,609 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:14:37,245 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:15:01,713 - INFO - 문장 비교 완료 - 소요시간: 31.56초
+2025-10-05 10:15:07,567 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 문제, 모델: multilingual
+2025-10-05 10:15:07,600 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:15:07,600 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:15:11,040 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:15:14,647 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:15:39,066 - INFO - 문장 비교 완료 - 소요시간: 31.50초
+2025-10-05 10:15:44,922 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 부정적, 모델: multilingual
+2025-10-05 10:15:44,951 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:15:44,951 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:15:48,843 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:15:52,480 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:16:17,175 - INFO - 문장 비교 완료 - 소요시간: 32.25초
+2025-10-05 10:16:23,220 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 악화, 모델: multilingual
+2025-10-05 10:16:23,241 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:16:23,241 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:16:26,675 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:16:30,273 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:16:54,999 - INFO - 문장 비교 완료 - 소요시간: 31.78초
+2025-10-05 10:17:00,894 - INFO - 문장 비교 시작 - 쿼리: 노사갈등 위기, 모델: multilingual
+2025-10-05 10:17:00,923 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:17:00,923 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:17:04,329 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:17:07,889 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:17:32,846 - INFO - 문장 비교 완료 - 소요시간: 31.95초
+2025-10-05 10:17:38,777 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 논란, 모델: multilingual
+2025-10-05 10:17:38,799 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:17:38,799 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:17:42,310 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:17:45,883 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:18:11,328 - INFO - 문장 비교 완료 - 소요시간: 32.55초
+2025-10-05 10:18:17,230 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 문제, 모델: multilingual
+2025-10-05 10:18:17,251 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:18:17,251 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:18:21,084 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:18:24,621 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:18:50,380 - INFO - 문장 비교 완료 - 소요시간: 33.15초
+2025-10-05 10:18:56,310 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 부정적, 모델: multilingual
+2025-10-05 10:18:56,330 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:18:56,330 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:18:59,790 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:19:03,547 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:19:29,590 - INFO - 문장 비교 완료 - 소요시간: 33.28초
+2025-10-05 10:19:35,679 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 악화, 모델: multilingual
+2025-10-05 10:19:35,704 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:19:35,704 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:19:39,191 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:19:43,298 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:20:09,416 - INFO - 문장 비교 완료 - 소요시간: 33.74초
+2025-10-05 10:20:15,422 - INFO - 문장 비교 시작 - 쿼리: 노사분쟁 위기, 모델: multilingual
+2025-10-05 10:20:15,449 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:20:15,449 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:20:18,901 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:20:22,469 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:20:48,728 - INFO - 문장 비교 완료 - 소요시간: 33.31초
+2025-10-05 10:20:54,914 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 논란, 모델: multilingual
+2025-10-05 10:20:54,940 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:20:54,940 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:20:58,344 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:21:01,979 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:21:28,419 - INFO - 문장 비교 완료 - 소요시간: 33.50초
+2025-10-05 10:21:34,381 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 문제, 모델: multilingual
+2025-10-05 10:21:34,405 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:21:34,405 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:21:37,849 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:21:41,751 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:22:08,701 - INFO - 문장 비교 완료 - 소요시간: 34.32초
+2025-10-05 10:22:14,704 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 부정적, 모델: multilingual
+2025-10-05 10:22:14,724 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:22:14,724 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:22:18,227 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:22:21,812 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:22:48,802 - INFO - 문장 비교 완료 - 소요시간: 34.10초
+2025-10-05 10:22:54,866 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 악화, 모델: multilingual
+2025-10-05 10:22:54,892 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:22:54,892 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:22:58,342 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:23:01,874 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:23:28,985 - INFO - 문장 비교 완료 - 소요시간: 34.12초
+2025-10-05 10:23:34,985 - INFO - 문장 비교 시작 - 쿼리: 노조탄압 위기, 모델: multilingual
+2025-10-05 10:23:35,003 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:23:35,003 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:23:38,436 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:23:41,962 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:24:09,612 - INFO - 문장 비교 완료 - 소요시간: 34.63초
+2025-10-05 10:24:15,630 - INFO - 문장 비교 시작 - 쿼리: 파업 논란, 모델: multilingual
+2025-10-05 10:24:15,652 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:24:15,652 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:24:19,064 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:24:22,647 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:24:50,105 - INFO - 문장 비교 완료 - 소요시간: 34.47초
+2025-10-05 10:24:56,188 - INFO - 문장 비교 시작 - 쿼리: 파업 문제, 모델: multilingual
+2025-10-05 10:24:56,215 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:24:56,215 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:24:59,635 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:25:03,204 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:25:30,912 - INFO - 문장 비교 완료 - 소요시간: 34.72초
+2025-10-05 10:25:36,937 - INFO - 문장 비교 시작 - 쿼리: 파업 부정적, 모델: multilingual
+2025-10-05 10:25:36,964 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:25:36,964 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:25:40,401 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:25:43,954 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:26:11,879 - INFO - 문장 비교 완료 - 소요시간: 34.94초
+2025-10-05 10:26:18,075 - INFO - 문장 비교 시작 - 쿼리: 파업 악화, 모델: multilingual
+2025-10-05 10:26:18,097 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:26:18,097 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:26:21,531 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:26:25,126 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:26:53,408 - INFO - 문장 비교 완료 - 소요시간: 35.33초
+2025-10-05 10:26:59,507 - INFO - 문장 비교 시작 - 쿼리: 파업 위기, 모델: multilingual
+2025-10-05 10:26:59,530 - INFO - Use pytorch device_name: cuda:0
+2025-10-05 10:26:59,530 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:27:02,982 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-05 10:27:06,579 - INFO - 1709개 문장 로드 완료
+2025-10-05 10:27:35,345 - INFO - 문장 비교 완료 - 소요시간: 35.84초
+2025-10-07 15:45:35,941 - INFO - 문장 비교 시작 - 쿼리: 그린하우스가스(GHG)배출 논란, 모델: multilingual
+2025-10-07 15:45:35,941 - INFO - 문장 비교 시작 - 쿼리: 기후변화유발 논란, 모델: multilingual
+2025-10-07 15:45:36,016 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:45:36,016 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:45:36,016 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:45:40,137 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:45:40,156 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:45:43,950 - INFO - 4152개 문장 로드 완료
+2025-10-07 15:45:44,031 - INFO - 10140개 문장 로드 완료
+2025-10-07 15:45:55,004 - INFO - 문장 비교 시작 - 쿼리: ESG금융 논란, 모델: multilingual
+2025-10-07 15:45:55,035 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:45:55,035 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:45:59,474 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:46:04,195 - INFO - 10656개 문장 로드 완료
+2025-10-07 15:46:04,809 - INFO - 문장 비교 시작 - 쿼리: 기업탄소배출계수 논란, 모델: multilingual
+2025-10-07 15:46:04,843 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:46:04,844 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:46:09,474 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:46:14,213 - INFO - 3505개 문장 로드 완료
+2025-10-07 15:46:38,049 - INFO - 문장 비교 시작 - 쿼리: 무분별한토지이용 논란, 모델: multilingual
+2025-10-07 15:46:38,084 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:46:38,084 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:46:42,991 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:46:47,920 - INFO - 2653개 문장 로드 완료
+2025-10-07 15:47:53,456 - INFO - 문장 비교 완료 - 소요시간: 137.52초
+2025-10-07 15:48:06,772 - INFO - 문장 비교 시작 - 쿼리: 기후변화유발 문제, 모델: multilingual
+2025-10-07 15:48:06,810 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:48:06,810 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:48:11,148 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:48:16,009 - INFO - 4152개 문장 로드 완료
+2025-10-07 15:48:20,780 - INFO - 문장 비교 완료 - 소요시간: 135.97초
+2025-10-07 15:48:27,005 - INFO - 문장 비교 완료 - 소요시간: 108.96초
+2025-10-07 15:48:32,832 - INFO - 문장 비교 시작 - 쿼리: 기업탄소배출계수 문제, 모델: multilingual
+2025-10-07 15:48:32,864 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:48:32,866 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:48:37,067 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:48:38,595 - INFO - 문장 비교 시작 - 쿼리: 무분별한토지이용 문제, 모델: multilingual
+2025-10-07 15:48:38,627 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:48:38,627 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:48:41,755 - INFO - 3505개 문장 로드 완료
+2025-10-07 15:48:43,291 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:48:48,068 - INFO - 2653개 문장 로드 완료
+2025-10-07 15:50:29,835 - INFO - 문장 비교 완료 - 소요시간: 111.24초
+2025-10-07 15:50:42,447 - INFO - 문장 비교 시작 - 쿼리: 무분별한토지이용 부정적, 모델: multilingual
+2025-10-07 15:50:42,482 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:50:42,482 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:50:46,725 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:50:47,317 - INFO - 문장 비교 완료 - 소요시간: 160.55초
+2025-10-07 15:50:51,076 - INFO - 문장 비교 완료 - 소요시간: 138.24초
+2025-10-07 15:50:51,427 - INFO - 2653개 문장 로드 완료
+2025-10-07 15:50:58,605 - INFO - 문장 비교 시작 - 쿼리: 기후변화유발 부정적, 모델: multilingual
+2025-10-07 15:50:58,639 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:50:58,639 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:51:02,583 - INFO - 문장 비교 시작 - 쿼리: 기업탄소배출계수 부정적, 모델: multilingual
+2025-10-07 15:51:02,616 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:51:02,616 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:51:02,847 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:51:06,880 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:51:07,583 - INFO - 4152개 문장 로드 완료
+2025-10-07 15:51:11,760 - INFO - 3505개 문장 로드 완료
+2025-10-07 15:51:23,490 - INFO - 문장 비교 완료 - 소요시간: 347.55초
+2025-10-07 15:51:36,847 - INFO - 문장 비교 시작 - 쿼리: 그린하우스가스(GHG)배출 문제, 모델: multilingual
+2025-10-07 15:51:36,885 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:51:36,886 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:51:41,291 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:51:46,351 - INFO - 10140개 문장 로드 완료
+2025-10-07 15:52:13,221 - INFO - 문장 비교 완료 - 소요시간: 378.22초
+2025-10-07 15:52:23,190 - INFO - 문장 비교 완료 - 소요시간: 100.74초
+2025-10-07 15:52:26,316 - INFO - 문장 비교 시작 - 쿼리: ESG금융 문제, 모델: multilingual
+2025-10-07 15:52:26,351 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:52:26,351 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:52:30,719 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:52:35,247 - INFO - 문장 비교 시작 - 쿼리: 무분별한토지이용 악화, 모델: multilingual
+2025-10-07 15:52:35,275 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:52:35,275 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:52:36,393 - INFO - 10656개 문장 로드 완료
+2025-10-07 15:52:40,507 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:52:45,434 - INFO - 2653개 문장 로드 완료
+2025-10-07 15:53:19,284 - INFO - 문장 비교 완료 - 소요시간: 136.70초
+2025-10-07 15:53:32,202 - INFO - 문장 비교 시작 - 쿼리: 기업탄소배출계수 악화, 모델: multilingual
+2025-10-07 15:53:32,238 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:53:32,238 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:53:36,555 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:53:38,314 - INFO - 문장 비교 완료 - 소요시간: 159.71초
+2025-10-07 15:53:41,179 - INFO - 3505개 문장 로드 완료
+2025-10-07 15:53:50,980 - INFO - 문장 비교 시작 - 쿼리: 기후변화유발 악화, 모델: multilingual
+2025-10-07 15:53:51,014 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:53:51,015 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:53:55,697 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:54:00,599 - INFO - 4152개 문장 로드 완료
+2025-10-07 15:54:27,475 - INFO - 문장 비교 완료 - 소요시간: 112.23초
+2025-10-07 15:54:40,872 - INFO - 문장 비교 시작 - 쿼리: 무분별한토지이용 위기, 모델: multilingual
+2025-10-07 15:54:40,915 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:54:40,915 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:54:45,378 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:54:50,228 - INFO - 2653개 문장 로드 완료
+2025-10-07 15:55:57,939 - INFO - 문장 비교 완료 - 소요시간: 145.74초
+2025-10-07 15:56:11,403 - INFO - 문장 비교 시작 - 쿼리: 기업탄소배출계수 위기, 모델: multilingual
+2025-10-07 15:56:11,441 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:56:11,441 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:56:15,819 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:56:20,674 - INFO - 3505개 문장 로드 완료
+2025-10-07 15:56:32,497 - INFO - 문장 비교 완료 - 소요시간: 111.62초
+2025-10-07 15:56:40,380 - INFO - 문장 비교 완료 - 소요시간: 169.40초
+2025-10-07 15:56:44,590 - INFO - 문장 비교 시작 - 쿼리: 생물다양성파괴 논란, 모델: multilingual
+2025-10-07 15:56:44,639 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:56:44,639 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:56:48,863 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:56:52,108 - INFO - 문장 비교 시작 - 쿼리: 기후변화유발 위기, 모델: multilingual
+2025-10-07 15:56:52,141 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:56:52,141 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:56:53,494 - INFO - 2653개 문장 로드 완료
+2025-10-07 15:56:56,496 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2025-10-07 15:57:01,371 - INFO - 4152개 문장 로드 완료
+2025-10-07 15:57:55,671 - INFO - 문장 비교 완료 - 소요시간: 378.82초
+2025-10-07 15:58:08,619 - INFO - 문장 비교 시작 - 쿼리: 그린하우스가스(GHG)배출 부정적, 모델: multilingual
+2025-10-07 15:58:08,652 - INFO - Use pytorch device_name: cuda:0
+2025-10-07 15:58:08,652 - INFO - Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2

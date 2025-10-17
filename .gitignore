@@ -1,0 +1,12 @@
+.csv
+.env
+*.xlsx
+/data_venv
+/data1
+/III
+/news_analyzer/output/
+news_analyzer/output/
+news_analyzer/output/
+*.xlsx
+news_analyzer/output/
+*.xlsx

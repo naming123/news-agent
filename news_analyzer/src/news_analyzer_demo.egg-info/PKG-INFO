@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: news-analyzer-demo
+Version: 0.1.0
+Summary: Mock news analysis pipeline: crawler -> sentiment -> company id -> save
+Author: Your Name
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+# News Analyzer (Modular Demo)
+
+모의 네이버 뉴스 크롤링 → 감정(키워드) 분석 → 기업 식별 → 저장 파이프라인 샘플.
+
+## 구조
+```text
+news_analyzer/
+  ├─ src/
+  │  └─ news_analyzer/
+  │     ├─ __init__.py
+  │     ├─ sentiment_analyzer.py
+  │     ├─ company_identifier.py
+  │     ├─ naver_crawler.py
+  │     └─ pipeline/
+  │        ├─ __init__.py
+  │        └─ news_pipeline.py
+  ├─ scripts/
+  │  └─ main.py
+  ├─ tests/
+  │  ├─ test_sentiment_analyzer.py
+  │  ├─ test_company_identifier.py
+  │  └─ test_pipeline.py
+  ├─ requirements.txt
+  └─ pyproject.toml
+```
+
+## 실행
+```bash
+# 개발 모드 (src 패키지 인식)
+export PYTHONPATH=./src:$PYTHONPATH
+python scripts/main.py
+```
+
+## 테스트
+```bash
+export PYTHONPATH=./src:$PYTHONPATH
+python -m pytest -q
+```
+
+> 주의: 본 저장소의 크롤러는 실제 요청 없이 **모의 데이터**만 생성합니다.

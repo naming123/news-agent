@@ -1,0 +1,18 @@
+# don't use korean in this utf-8 file
+streamlit==1.31.0
+pandas==2.2.0
+numpy==1.26.3
+plotly==5.18.0
+wordcloud>=1.9.3
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+requests==2.31.0
+beautifulsoup4==4.12.3
+lxml==5.1.0
+fake-useragent==1.4.0
+python-dateutil==2.8.2
+selenium==4.16.0
+webdriver-manager==4.0.1
+python-dotenv==1.0.1
+pytest==8.0.0
+pytest-cov==4.1.0
